@@ -115,7 +115,7 @@ export default function ParameterSliders({ params, setParams, isRunning, gameMod
              <div style={{ marginBottom: '1.5rem', background: nukeFired ? 'rgba(255, 0, 0, 0.2)' : 'rgba(255, 0, 0, 0.05)', border: nukeFired ? '2px solid var(--red)' : '1px solid var(--red)', borderRadius: '6px', padding: '1rem', textAlign: 'center', transition: 'all 0.5s ease' }}>
                 <div style={{ color: 'var(--red)', fontSize: '0.8rem', fontWeight: 'bold', letterSpacing: '1px', marginBottom: '0.5rem' }}>NUCLEAR SANITIZATION PROTOCOL</div>
                 <div style={{ fontSize: '0.7rem', color: '#ccc', marginBottom: '1rem' }}>AI Authorization Only. Evaluates global despair thresholds. Eradicates pathogen by neutralizing all infected civilians.</div>
-                <button className={`hud-btn ${nukeFired ? '' : 'glow'}`} style={{ borderColor: 'var(--red)', color: 'var(--red)', width: '100%', opacity: nukeFired ? 1 : 0.5, cursor: 'not-allowed', background: nukeFired ? 'var(--red)' : 'transparent', color: nukeFired ? '#000' : 'var(--red)', fontWeight: 'bold' }} disabled>
+                <button className={`hud-btn ${nukeFired ? '' : 'glow'}`} style={{ borderColor: 'var(--red)', width: '100%', opacity: nukeFired ? 1 : 0.5, cursor: 'not-allowed', background: nukeFired ? 'var(--red)' : 'transparent', color: nukeFired ? '#000' : 'var(--red)', fontWeight: 'bold' }} disabled>
                     {nukeFired ? "⚠️ PROTOCOL EXECUTED" : "AWAITING AI AUTHORIZATION"}
                 </button>
              </div>
@@ -126,7 +126,7 @@ export default function ParameterSliders({ params, setParams, isRunning, gameMod
                      const optModule = await import('../data/aegis_model.json');
                      const opt = optModule.default;
                      if(!opt) return;
-                     const inp = [params.r0, params.incubationPeriod, params.caseFatalityRate, params.travelVolume];
+                     const inp = [params.r0, params.incubationPeriod, params.caseFatalityRate, params.airImmunity, params.waterImmunity];
                      const scaledInp = inp.map((v, i) => (v - opt.scaler_X_mean[i]) / opt.scaler_X_scale[i]);
                      
                      let l1 = [];
@@ -149,14 +149,29 @@ export default function ParameterSliders({ params, setParams, isRunning, gameMod
                      }
                      const res = out.map((v, i) => (v * opt.scaler_y_scale[i]) + opt.scaler_y_mean[i]);
                      
+                     
+                     const severity = Math.max(0, Math.min(1, 
+                         ((params.r0 - 1) / 12) * 0.55 + 
+                         params.caseFatalityRate * 0.20 + 
+                         params.airImmunity * 0.125 + 
+                         params.waterImmunity * 0.125
+                     ));
+
+                     const minIntervention = 0.60 + severity * 0.35;
+                     const minBorder = 0.55 + severity * 0.40;
+                     const minHygiene = 0.55 + severity * 0.35;
+                     const minQuarantine = 0.60 + severity * 0.35;
+                     const minVaccine = 0.65 + severity * 0.30;
+                     
                      setParams({ 
                          ...params,
-                         interventionStringency: parseFloat(Math.max(0, Math.min(1, res[0])).toFixed(2)),
-                         borderStrictness: parseFloat(Math.max(0, Math.min(1, res[1])).toFixed(2)),
-                         hygieneCompliance: parseFloat(Math.max(0, Math.min(1, res[2])).toFixed(2)),
-                         quarantineEfficiency: parseFloat(Math.max(0, Math.min(1, res[3])).toFixed(2)),
-                         vaccineFunding: parseFloat(Math.max(0, Math.min(1, res[4])).toFixed(2))
+                         interventionStringency: parseFloat(Math.max(minIntervention, Math.min(1, res[0])).toFixed(2)),
+                         borderStrictness: parseFloat(Math.max(minBorder, Math.min(1, res[1])).toFixed(2)),
+                         hygieneCompliance: parseFloat(Math.max(minHygiene, Math.min(1, res[2])).toFixed(2)),
+                         quarantineEfficiency: parseFloat(Math.max(minQuarantine, Math.min(1, res[3])).toFixed(2)),
+                         vaccineFunding: parseFloat(Math.max(minVaccine, Math.min(1, res[4])).toFixed(2))
                      });
+
                      alert("AEGIS System updated global defenses based on current threat.");
                  }}
              >

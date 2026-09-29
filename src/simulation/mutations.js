@@ -1,4 +1,4 @@
-export function checkMutation(day, totalGlobalInfected, params, existingVariants) {
+export function checkMutation(day, totalGlobalInfected, params, existingVariants, gameMode = 'AEGIS') {
   let p = params.mutationRate * (totalGlobalInfected / 1e8) * 0.01;
   p = Math.min(p, 0.3);
   
@@ -15,11 +15,18 @@ export function checkMutation(day, totalGlobalInfected, params, existingVariants
       name = 'Variant-' + (index + 1);
     }
     
+    let r0Modifier = 0.8 + Math.random() * 0.6;
+    let immuneEscape = Math.random() * 0.3;
+    if (gameMode === 'DOOMSDAY') {
+        r0Modifier = 1.05 + Math.random() * 0.15; // 1.05 to 1.20
+        immuneEscape = 0.05 + Math.random() * 0.20; // 0.05 to 0.25
+    }
+
     return {
       id: 'variant_' + (index + 1),
       name: name,
-      r0Modifier: 0.8 + Math.random() * 0.6,
-      immuneEscape: Math.random() * 0.3,
+      r0Modifier: r0Modifier,
+      immuneEscape: immuneEscape,
       emergenceDay: day
     };
   }

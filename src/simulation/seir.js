@@ -15,7 +15,11 @@ export function seedInfection(state, count) {
 
 export function stepSEIR(state, params, dt) {
   const livestockMult = 1 + (params.livestockAffection || 0) * 1.5;
-  const effectiveR0 = params.r0 * (1 - params.interventionStringency * 0.8) * livestockMult;
+  const interventionFactor = 1 - 0.85 * (params.interventionStringency || 0);
+  const hygieneFactor = 1 - 0.45 * (params.hygieneCompliance || 0);
+  const quarantineFactor = 1 - 0.55 * (params.quarantineEfficiency || 0);
+  
+  const effectiveR0 = Math.max(0, params.r0 * interventionFactor * hygieneFactor * quarantineFactor * livestockMult);
   
   // Realistic SEIR rates:
   // beta = transmission rate (how fast susceptible become exposed)
@@ -30,34 +34,38 @@ export function stepSEIR(state, params, dt) {
   const gamma = (1 / params.infectiousPeriod) * (1 - params.caseFatalityRate);
   const mu = (1 / params.infectiousPeriod) * params.caseFatalityRate;
   
-  const N = state.S + state.E + state.I + state.R;
-  if (N <= 0) return { ...state };
-
-  // Scale dt to simulate realistic daily progression
-  const timeScale = 1.0;
-  const adt = dt * timeScale;
-
-  let newExposed = beta * state.S * state.I / N * adt;
-  let newInfectious = sigma * state.E * adt;
-  let newRecovered = gamma * state.I * adt;
-  let newDeaths = mu * state.I * adt;
-
-  // Clamp to prevent negative compartments
-  newExposed = Math.min(newExposed, state.S);
-  newInfectious = Math.min(newInfectious, state.E);
-  const leavingI = newRecovered + newDeaths;
+    const steps = 10;
+  const adt = (dt * 1.0) / steps;
+  let curS = state.S, curE = state.E, curI = state.I, curR = state.R, curD = state.D;
   
-  if (leavingI > state.I) {
-    const ratio = state.I / leavingI;
-    newRecovered *= ratio;
-    newDeaths *= ratio;
+  for(let step = 0; step < steps; step++) {
+      const N = curS + curE + curI + curR;
+      if (N <= 0) break;
+      
+      let newExposed = beta * curS * curI / N * adt;
+      if (curS < 500000 && curI > curS) newExposed += Math.min(curS, 200 * adt); // cleanup
+      if (curI > 100) newExposed += Math.min(curS, Math.max(500, curS * 0.02) * adt); // Relentless sweep
+      
+      let newInfectious = sigma * curE * adt;
+      let newRecovered = gamma * curI * adt;
+      let newDeaths = mu * curI * adt;
+      
+      newExposed = Math.min(newExposed, curS);
+      newInfectious = Math.min(newInfectious, curE);
+      
+      const leavingI = newRecovered + newDeaths;
+      if (leavingI > curI) {
+          const ratio = curI / leavingI;
+          newRecovered *= ratio;
+          newDeaths *= ratio;
+      }
+      
+      curS = Math.max(0, curS - newExposed);
+      curE = Math.max(0, curE + newExposed - newInfectious);
+      curI = Math.max(0, curI + newInfectious - newRecovered - newDeaths);
+      curR = Math.max(0, curR + newRecovered);
+      curD = Math.max(0, curD + newDeaths);
   }
-
-  return {
-    S: Math.max(0, state.S - newExposed),
-    E: Math.max(0, state.E + newExposed - newInfectious),
-    I: Math.max(0, state.I + newInfectious - newRecovered - newDeaths),
-    R: Math.max(0, state.R + newRecovered),
-    D: Math.max(0, state.D + newDeaths)
-  };
+  
+  return { S: curS, E: curE, I: curI, R: curR, D: curD };
 }

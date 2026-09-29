@@ -1,0 +1,37 @@
+const fs = require('fs');
+
+const profilesCode = `const diseaseProfiles = [
+  { name: "COVID-19 (Omicron BA.1)", r0: 9.5, caseFatalityRate: 0.005, incubationPeriod: 3.5, infectiousPeriod: 8.0, airImmunity: 0.8, waterImmunity: 0.1 },
+  { name: "SARS-CoV-1 (2003)", r0: 3.0, caseFatalityRate: 0.11, incubationPeriod: 5.0, infectiousPeriod: 14.0, airImmunity: 0.6, waterImmunity: 0.05 },
+  { name: "Middle East Respiratory Syndrome (MERS)", r0: 0.8, caseFatalityRate: 0.35, incubationPeriod: 5.5, infectiousPeriod: 10.0, airImmunity: 0.4, waterImmunity: 0.0 },
+  { name: "Ebola Virus (Zaire ebolavirus)", r0: 2.0, caseFatalityRate: 0.50, incubationPeriod: 10.0, infectiousPeriod: 12.0, airImmunity: 0.1, waterImmunity: 0.6 },
+  { name: "Marburg Virus Disease", r0: 1.8, caseFatalityRate: 0.88, incubationPeriod: 9.0, infectiousPeriod: 10.0, airImmunity: 0.2, waterImmunity: 0.7 },
+  { name: "Lassa Fever", r0: 1.3, caseFatalityRate: 0.15, incubationPeriod: 10.0, infectiousPeriod: 14.0, airImmunity: 0.1, waterImmunity: 0.5 },
+  { name: "H1N1 Influenza (1918 Strain)", r0: 2.8, caseFatalityRate: 0.025, incubationPeriod: 2.0, infectiousPeriod: 7.0, airImmunity: 0.75, waterImmunity: 0.2 },
+  { name: "Avian Influenza (H5N1)", r0: 1.2, caseFatalityRate: 0.53, incubationPeriod: 3.0, infectiousPeriod: 8.0, airImmunity: 0.6, waterImmunity: 0.3 },
+  { name: "Variola Major (Smallpox)", r0: 6.0, caseFatalityRate: 0.30, incubationPeriod: 12.0, infectiousPeriod: 16.0, airImmunity: 0.8, waterImmunity: 0.3 },
+  { name: "Measles (Morbillivirus)", r0: 18.0, caseFatalityRate: 0.02, incubationPeriod: 11.0, infectiousPeriod: 8.0, airImmunity: 0.95, waterImmunity: 0.0 },
+  { name: "Polio (Poliovirus)", r0: 6.0, caseFatalityRate: 0.05, incubationPeriod: 10.0, infectiousPeriod: 14.0, airImmunity: 0.1, waterImmunity: 0.85 },
+  { name: "Zika Virus", r0: 1.5, caseFatalityRate: 0.001, incubationPeriod: 7.0, infectiousPeriod: 14.0, airImmunity: 0.0, waterImmunity: 0.8 },
+  { name: "Dengue Fever", r0: 2.0, caseFatalityRate: 0.01, incubationPeriod: 6.0, infectiousPeriod: 12.0, airImmunity: 0.0, waterImmunity: 0.85 },
+  { name: "Yellow Fever", r0: 1.2, caseFatalityRate: 0.08, incubationPeriod: 4.0, infectiousPeriod: 10.0, airImmunity: 0.0, waterImmunity: 0.8 },
+  { name: "Rabies (Lyssavirus)", r0: 1.1, caseFatalityRate: 0.99, incubationPeriod: 45.0, infectiousPeriod: 10.0, airImmunity: 0.0, waterImmunity: 0.1 },
+  { name: "Nipah Virus", r0: 0.4, caseFatalityRate: 0.75, incubationPeriod: 9.0, infectiousPeriod: 14.0, airImmunity: 0.3, waterImmunity: 0.4 },
+  { name: "Yersinia pestis (Pneumonic Plague)", r0: 3.0, caseFatalityRate: 0.95, incubationPeriod: 2.0, infectiousPeriod: 5.0, airImmunity: 0.9, waterImmunity: 0.3 },
+  { name: "Yersinia pestis (Bubonic Plague)", r0: 1.5, caseFatalityRate: 0.15, incubationPeriod: 4.0, infectiousPeriod: 14.0, airImmunity: 0.1, waterImmunity: 0.5 },
+  { name: "Vibrio cholerae (Cholera)", r0: 2.5, caseFatalityRate: 0.02, incubationPeriod: 2.0, infectiousPeriod: 7.0, airImmunity: 0.0, waterImmunity: 0.95 },
+  { name: "Mycobacterium tuberculosis (TB)", r0: 0.5, caseFatalityRate: 0.10, incubationPeriod: 28.0, infectiousPeriod: 60.0, airImmunity: 0.7, waterImmunity: 0.0 },
+  { name: "Salmonella typhi (Typhoid Fever)", r0: 2.0, caseFatalityRate: 0.12, incubationPeriod: 10.0, infectiousPeriod: 21.0, airImmunity: 0.0, waterImmunity: 0.85 },
+  { name: "Bacillus anthracis (Inhalation Anthrax)", r0: 1.1, caseFatalityRate: 0.85, incubationPeriod: 4.0, infectiousPeriod: 5.0, airImmunity: 0.4, waterImmunity: 0.2 },
+  { name: "Plasmodium falciparum (Malaria)", r0: 2.5, caseFatalityRate: 0.003, incubationPeriod: 12.0, infectiousPeriod: 30.0, airImmunity: 0.0, waterImmunity: 0.8 },
+  { name: "Norovirus (Winter Vomiting Bug)", r0: 14.0, caseFatalityRate: 0.0001, incubationPeriod: 1.5, infectiousPeriod: 3.0, airImmunity: 0.2, waterImmunity: 0.7 },
+  { name: "Rotavirus", r0: 16.0, caseFatalityRate: 0.001, incubationPeriod: 2.0, infectiousPeriod: 6.0, airImmunity: 0.1, waterImmunity: 0.8 },
+  { name: "Bordetella pertussis (Whooping Cough)", r0: 15.0, caseFatalityRate: 0.01, incubationPeriod: 9.0, infectiousPeriod: 21.0, airImmunity: 0.8, waterImmunity: 0.0 },
+  { name: "Neisseria meningitidis (Meningitis)", r0: 1.4, caseFatalityRate: 0.15, incubationPeriod: 4.0, infectiousPeriod: 7.0, airImmunity: 0.6, waterImmunity: 0.1 }
+];
+
+export default diseaseProfiles;
+`;
+
+fs.writeFileSync('src/data/diseaseProfiles.js', profilesCode);
+console.log('Added 27 pathogens to disease profiles');
