@@ -1,0 +1,109 @@
+.immersive-home {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 1.5s ease-out;
+}
+
+.ih-header {
+  position: absolute;
+  top: 8vh;
+  z-index: 10;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.ih-logo {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.ih-logo .brand-icon {
+   width: 44px; height: 44px;
+   background: rgba(0, 245, 212, 0.1);
+   border: 1px solid rgba(0, 245, 212, 0.5);
+   border-radius: 12px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.ih-logo .brand-text {
+   font-size: 1.6rem;
+   font-weight: 800;
+   letter-spacing: 0.5em;
+   color: #fff;
+   margin-right: -0.5em;
+}
+
+.ih-earth-container {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 100vw;
+   height: 100vh;
+   z-index: 5;
+}
+
+.ih-footer {
+   position: absolute;
+   bottom: 8vh;
+   z-index: 10;
+   transition: opacity 0.6s ease;
+   pointer-events: none;
+}
+
+.ih-instruction {
+   font-size: 0.9rem;
+   font-weight: 600;
+   letter-spacing: 0.3em;
+   color: rgba(255,255,255,0.7);
+   text-transform: uppercase;
+   transition: all 0.3s ease;
+}
+
+.ih-instruction.highlight {
+   color: #fff;
+   text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.pulse {
+   animation: pulse-opacity 3s infinite ease-in-out;
+}
+
+@keyframes pulse-opacity {
+   0%, 100% { opacity: 0.3; }
+   50% { opacity: 1; text-shadow: 0 0 15px rgba(255,255,255,0.6); }
+}
+
+.fade-out {
+   opacity: 0 !important;
+}
+
+.ih-transition-overlay {
+   position: absolute;
+   top: 0; left: 0; right: 0; bottom: 0;
+   background: #050714;
+   opacity: 0;
+   z-index: 20;
+   pointer-events: none;
+}
+
+.ih-transition-overlay.active {
+   animation: cinematic-enter 1.4s cubic-bezier(0.8, 0, 0.2, 1) forwards;
+}
+
+@keyframes cinematic-enter {
+   0% { opacity: 0; background: radial-gradient(circle at center, transparent 0%, transparent 100%); }
+   50% { opacity: 0.5; background: radial-gradient(circle at center, transparent 20%, rgba(229, 9, 47, 0.8) 100%); }
+   100% { opacity: 1; background: #050714; }
+}
