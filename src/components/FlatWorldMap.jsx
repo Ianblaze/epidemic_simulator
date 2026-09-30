@@ -448,7 +448,7 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
           if (v.progress >= 1) {
             // Infect destination
             if (v.infected && inboundInfectionsRef && inboundInfectionsRef.current) {
-                // inboundInfectionsRef.current.push({ countryId: v.endCountry, amount: 10 }); // Disabled so math core drives spread
+                inboundInfectionsRef.current.push({ countryId: v.endCountry, amount: v.payload || 10 });
             }
             continue; // Do not push to activeVehicles, thus removing it
           }

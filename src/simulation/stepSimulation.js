@@ -85,9 +85,9 @@ export function stepSimulation(states, currentParams, day, gameMode, prevTotalGl
                         const routeRisk = Math.min(1.0, infectionPressure * 1.5 * (1 - borderStrictness));
                         if (random() < routeRisk) {
                             const amount = Math.floor(1 + random() * 20);
-                        const actualAmount = Math.min(ns.S, amount);
-                        ns.S -= actualAmount;
-                        ns.E += actualAmount;
+                            const actualAmount = Math.min(ns.S, amount);
+                            // DON'T infect here — let the visual land arc carry the payload
+                            if (actualAmount > 0) transitEvents.push({ origin: countryId, target: nid, type: 'land', amount: actualAmount });
                         }
                     }
                 });
@@ -108,18 +108,16 @@ export function stepSimulation(states, currentParams, day, gameMode, prevTotalGl
                         if (random() < airRisk) {
                             const amount = Math.floor(5 + random() * 25);
                             const actualAmount = Math.min(rTarget.S, amount);
-                            rTarget.S -= actualAmount;
-                            rTarget.E += actualAmount;
-                            if (actualAmount > 0) transitEvents.push({ origin: countryId, target: rTargetId, type: 'flight' });
+                            // DON'T infect here — let the visual plane carry the payload
+                            if (actualAmount > 0) transitEvents.push({ origin: countryId, target: rTargetId, type: 'flight', amount: actualAmount });
                         }
                         
                         const seaRisk = Math.min(1.0, infectionPressure * seaVolume * waterTrans * (1 - borderStrictness) * 0.15);
                         if (random() < seaRisk) {
                             const amount = Math.floor(1 + random() * 5);
                             const actualAmount = Math.min(rTarget.S, amount);
-                            rTarget.S -= actualAmount;
-                            rTarget.E += actualAmount;
-                            if (actualAmount > 0) transitEvents.push({ origin: countryId, target: rTargetId, type: 'ship' });
+                            // DON'T infect here — let the visual ship carry the payload
+                            if (actualAmount > 0) transitEvents.push({ origin: countryId, target: rTargetId, type: 'ship', amount: actualAmount });
                         }
                     }
                 }
