@@ -16,22 +16,22 @@ for _ in range(5000):
     
     # AI logic:
     # High pop -> need high R0
-    r0 = np.random.uniform(10.0, 20.0) + (pop / 1500.0) * 10.0
+    r0 = np.random.uniform(5.0, 12.0) + (pop / 1500.0) * 6.0
     
-    # High flights -> maximize air to exploit it. Baseline 0.4 to ensure it can escape
-    air = 0.6 + (flights * 0.4) + np.random.uniform(-0.1, 0.1)
+    # High flights -> maximize air to exploit it
+    air = 0.5 + (flights * 0.4) + np.random.uniform(-0.1, 0.1)
     
-    # High ships -> maximize water to exploit it. Baseline 0.4
-    water = 0.6 + (ships * 0.4) + np.random.uniform(-0.1, 0.1)
+    # High ships -> maximize water to exploit it
+    water = 0.5 + (ships * 0.4) + np.random.uniform(-0.1, 0.1)
     
-    # Incubation: longer for harder countries
-    incubation = np.random.uniform(14, 25)
+    # Incubation: 5-14 days
+    incubation = np.random.uniform(5, 14)
     
-    # Lethality: keep it reasonable
-    lethality = np.random.uniform(0.05, 0.2)
+    # Lethality: keep it reasonable (1% to 5%)
+    lethality = np.random.uniform(0.01, 0.05)
     
     X_venom.append([pop, flights, ships])
-    y_venom.append([r0, incubation, lethality, max(0, min(1, air)), max(0, min(1, water))])
+    y_venom.append([r0, incubation, lethality, max(0.0, min(1.0, air)), max(0.0, min(1.0, water))])
 
 X_v = np.array(X_venom)
 y_v = np.array(y_venom)
@@ -70,23 +70,23 @@ for _ in range(5000):
     air = np.random.uniform(0, 1)
     water = np.random.uniform(0, 1)
     
-    # AEGIS Logic: Calculate appropriate (but not perfectly maxed) defense levels
-    intervention = min(1.0, (r0 / 20.0) * 0.95 + 0.1 + np.random.uniform(0, 0.2))
+    # AEGIS Logic: Calculate appropriate initial defense levels (lower baseline to allow spread)
+    intervention = min(1.0, (r0 / 20.0) * 0.3 + 0.05 + np.random.uniform(0, 0.1))
     
     # If air/water transmission is high, close borders
-    border = min(1.0, ((air + water) / 2.0) * 0.95 + 0.1 + np.random.uniform(0, 0.2))
+    border = min(1.0, ((air + water) / 2.0) * 0.3 + 0.05 + np.random.uniform(0, 0.1))
     
     # Hygiene based on general danger
-    hygiene = min(1.0, (lethality * 0.6 + (r0/20.0) * 0.6) + 0.1 + np.random.uniform(0, 0.2))
+    hygiene = min(1.0, (lethality * 0.3 + (r0/20.0) * 0.3) + 0.05 + np.random.uniform(0, 0.1))
     
     # Quarantine based on incubation
-    quarantine = min(1.0, (incubation / 30.0) * 0.95 + 0.1 + np.random.uniform(0, 0.2))
+    quarantine = min(1.0, (incubation / 30.0) * 0.3 + 0.05 + np.random.uniform(0, 0.1))
     
     # Vaccine based on lethality
-    vaccine = min(1.0, lethality * 0.95 + 0.1 + np.random.uniform(0, 0.1))
+    vaccine = min(1.0, lethality * 0.5 + 0.1 + np.random.uniform(0, 0.1))
     
     X_aegis.append([r0, incubation, lethality, air, water])
-    y_aegis.append([intervention, border, hygiene, quarantine, vaccine])
+    y_aegis.append([max(0.0, intervention), max(0.0, border), max(0.0, hygiene), max(0.0, quarantine), max(0.0, vaccine)])
 
 X_a = np.array(X_aegis)
 y_a = np.array(y_aegis)

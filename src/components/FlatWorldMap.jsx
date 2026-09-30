@@ -4,7 +4,7 @@ import * as topojson from 'topojson-client';
 import worldAtlasUrl from 'world-atlas/countries-110m.json?url';
 import { airports, seaports, routes } from '../data/transit.js';
 
-export default function FlatWorldMap({ countryStates, params, isRunning, inboundInfectionsRef, vaccineProgress = 0 }) {
+export default function FlatWorldMap({ countryStates, params, isRunning, inboundInfectionsRef, vaccineProgress = 0, transitEvents = [] }) {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const [geoData, setGeoData] = useState(null);
@@ -23,6 +23,41 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
   const paramsRef = useRef(params);
   const runningRef = useRef(isRunning);
     const vaccineRef = useRef(vaccineProgress || 0);
+  
+    useEffect(() => {
+    if (isRunning && transitEvents && transitEvents.length > 0) {
+        transitEvents.forEach(evt => {
+            // Find coordinates, fallback to centroids if airport/seaport missing
+            let p1 = airports.find(p => p.country === evt.origin);
+            let p2 = airports.find(p => p.country === evt.target);
+            
+            if (!p1 && centroidsRef.current[evt.origin]) p1 = { x: centroidsRef.current[evt.origin][0], y: centroidsRef.current[evt.origin][1] };
+            if (!p2 && centroidsRef.current[evt.target]) p2 = { x: centroidsRef.current[evt.target][0], y: centroidsRef.current[evt.target][1] };
+
+            if (p1 && p2) {
+                if (evt.type === 'ship') {
+                    vehiclesRef.current.push({
+                        type: 'ship', startX: p1.x, startY: p1.y, endX: p2.x, endY: p2.y,
+                        endCountry: evt.target, progress: 0,
+                        speed: 0.01 + Math.random() * 0.01,
+                        infected: evt.isVaccine ? false : true, vaccine: evt.isVaccine ? true : false
+                    });
+                } else {
+                    const dx = p2.x - p1.x;
+                    const dy = p2.y - p1.y;
+                    // For land borders, draw a fast small arc. For flights, normal arc.
+                    vehiclesRef.current.push({
+                        type: 'flight', startX: p1.x, startY: p1.y, endX: p2.x, endY: p2.y,
+                        endCountry: evt.target, cx: p1.x + dx * 0.5 - dy * 0.2, cy: p1.y + dy * 0.5 + dx * 0.2,
+                        progress: 0,
+                        speed: evt.type === 'land' ? 0.05 : 0.02 + Math.random() * 0.01,
+                        infected: evt.isVaccine ? false : true, vaccine: evt.isVaccine ? true : false
+                    });
+                }
+            }
+        });
+    }
+  }, [transitEvents]);
   
   useEffect(() => {
     statesRef.current = countryStates;
@@ -336,7 +371,11 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
           const p1 = activeSeaports.find(p => p.id === route.path[segmentIndex]);
           const p2 = activeSeaports.find(p => p.id === route.path[segmentIndex + 1]);
           
-          if (p1 && p2 && !p1.closed && !p2.closed) {
+          const s1 = statesRef.current ? statesRef.current.get(p1.country) : null;
+            const s2 = statesRef.current ? statesRef.current.get(p2.country) : null;
+            const closed1 = s1 && s1.I > (s1.S + s1.E + s1.I + s1.R) * 0.2; // Close borders if >20% infected
+            const closed2 = s2 && s2.I > (s2.S + s2.E + s2.I + s2.R) * 0.2;
+            if (p1 && p2 && !p1.closed && !p2.closed && !closed1 && !closed2) {
              const state = statesRef.current ? statesRef.current.get(p1.country) : null;
              let infected = false;
              let vaccine = false;
@@ -368,7 +407,11 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
           const a1 = activeAirports.find(a => a.id === pair[0]);
           const a2 = activeAirports.find(a => a.id === pair[1]);
           
-          if (a1 && a2 && !a1.closed && !a2.closed) {
+          const s1 = statesRef.current ? statesRef.current.get(a1.country) : null;
+            const s2 = statesRef.current ? statesRef.current.get(a2.country) : null;
+            const closed1 = s1 && s1.I > (s1.S + s1.E + s1.I + s1.R) * 0.2;
+            const closed2 = s2 && s2.I > (s2.S + s2.E + s2.I + s2.R) * 0.2;
+            if (a1 && a2 && !a1.closed && !a2.closed && !closed1 && !closed2) {
              const state = statesRef.current ? statesRef.current.get(a1.country) : null;
              let infected = false;
              let vaccine = false;
@@ -405,10 +448,7 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
           if (v.progress >= 1) {
             // Infect destination
             if (v.infected && inboundInfectionsRef && inboundInfectionsRef.current) {
-                inboundInfectionsRef.current.push({
-                   countryId: v.endCountry,
-                   amount: Math.floor(Math.random() * 50) + 10
-                });
+                // inboundInfectionsRef.current.push({ countryId: v.endCountry, amount: 10 }); // Disabled so math core drives spread
             }
             continue; // Do not push to activeVehicles, thus removing it
           }

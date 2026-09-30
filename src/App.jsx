@@ -52,6 +52,7 @@ export default function App() {
               params={simulation.params}
               isRunning={simulation.isRunning}
               inboundInfectionsRef={simulation.inboundInfectionsRef}
+              transitEvents={simulation.transitEvents}
               inboundVaccinesRef={simulation.inboundVaccinesRef}
               seedCountry={simulation.seedCountry}
               vaccineProgress={simulation.vaccineProgress}

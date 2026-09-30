@@ -13,28 +13,19 @@ export function seedInfection(state, count) {
   };
 }
 
-export function stepSEIR(state, params, dt) {
+export function stepSEIR(state, params, dt, gameMode) {
   const livestockMult = 1 + (params.livestockAffection || 0) * 1.5;
-  const interventionFactor = 1 - 0.85 * (params.interventionStringency || 0);
-  const hygieneFactor = 1 - 0.45 * (params.hygieneCompliance || 0);
-  const quarantineFactor = 1 - 0.55 * (params.quarantineEfficiency || 0);
+  const interventionEffect = 1 - 0.80 * (params.interventionStringency || 0);
+  const hygieneEffect = 1 - 0.40 * (params.hygieneCompliance || 0);
+  const quarantineEffect = 1 - 0.50 * (params.quarantineEfficiency || 0);
+  const effectiveR0 = Math.max(0, params.r0 * interventionEffect * hygieneEffect * quarantineEffect * livestockMult);
   
-  const effectiveR0 = Math.max(0, params.r0 * interventionFactor * hygieneFactor * quarantineFactor * livestockMult);
-  
-  // Realistic SEIR rates:
-  // beta = transmission rate (how fast susceptible become exposed)
-  // sigma = incubation rate (avg 5 days to become infectious)
-  // gamma = recovery rate (people recover over the infectious period)
-  // mu = death rate (fraction who die instead of recovering)
   const beta = effectiveR0 / params.infectiousPeriod;
   const sigma = 1 / params.incubationPeriod;
-  
-  // Recovery and death happen over the full infectious period (realistic timing)
-  // With CFR of 2.3%, most people recover, a small fraction die
   const gamma = (1 / params.infectiousPeriod) * (1 - params.caseFatalityRate);
   const mu = (1 / params.infectiousPeriod) * params.caseFatalityRate;
   
-    const steps = 10;
+  const steps = 10;
   const adt = (dt * 1.0) / steps;
   let curS = state.S, curE = state.E, curI = state.I, curR = state.R, curD = state.D;
   
@@ -43,8 +34,11 @@ export function stepSEIR(state, params, dt) {
       if (N <= 0) break;
       
       let newExposed = beta * curS * curI / N * adt;
-      if (curS < 500000 && curI > curS) newExposed += Math.min(curS, 200 * adt); // cleanup
-      if (curI > 100) newExposed += Math.min(curS, Math.max(500, curS * 0.02) * adt); // Relentless sweep
+      if (gameMode === 'DOOMSDAY' && curI > 0 && curS < N * 0.20) {
+          // Endgame sweep: Once the herd immunity threshold is nearing (e.g. < 20% remaining), 
+          // aggressively hunt down the rest to achieve DOOMSDAY victory conditions.
+          newExposed += Math.min(curS, curS * 0.02 + 10) * adt;
+      }
       
       let newInfectious = sigma * curE * adt;
       let newRecovered = gamma * curI * adt;

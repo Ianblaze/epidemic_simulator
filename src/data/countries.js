@@ -10,7 +10,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "ZAMBIA",
+      "ESWATINI",
+      "SOUTHAFRICA",
+      "MOZAMBIQUE",
+      "MALAWI",
+      "LESOTHO",
+      "BOTSWANA"
+    ]
   },
   {
     "id": "ZAMBIA",
@@ -23,7 +32,18 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "ZIMBABWE",
+      "TANZANIA",
+      "RWANDA",
+      "MOZAMBIQUE",
+      "MALAWI",
+      "DEMREPCONGO",
+      "BURUNDI",
+      "BOTSWANA",
+      "ANGOLA"
+    ]
   },
   {
     "id": "YEMEN",
@@ -36,7 +56,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "UNITEDARABEMIRATES",
+      "SOMALIA",
+      "SAUDIARABIA",
+      "QATAR",
+      "OMAN",
+      "ETHIOPIA",
+      "ERITREA",
+      "DJIBOUTI"
+    ]
   },
   {
     "id": "VIETNAM",
@@ -49,7 +79,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "THAILAND",
+      "LAOS",
+      "CAMBODIA",
+      "MYANMAR"
+    ]
   },
   {
     "id": "VENEZUELA",
@@ -62,7 +98,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "TRINIDADANDTOBAGO",
+      "SURINAME",
+      "GUYANA",
+      "COLOMBIA"
+    ]
   },
   {
     "id": "VATICAN",
@@ -75,7 +117,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": []
   },
   {
     "id": "VANUATU",
@@ -88,7 +131,11 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "SOLOMONIS",
+      "FIJI"
+    ]
   },
   {
     "id": "UZBEKISTAN",
@@ -101,7 +148,14 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "TURKMENISTAN",
+      "TAJIKISTAN",
+      "KYRGYZSTAN",
+      "KAZAKHSTAN",
+      "AFGHANISTAN"
+    ]
   },
   {
     "id": "URUGUAY",
@@ -114,7 +168,11 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "PARAGUAY",
+      "ARGENTINA"
+    ]
   },
   {
     "id": "MICRONESIA",
@@ -127,7 +185,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": []
   },
   {
     "id": "MARSHALLIS",
@@ -140,7 +199,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": []
   },
   {
     "id": "UNITEDSTATESOFAMERICA",
@@ -153,7 +213,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": []
   },
   {
     "id": "UNITEDKINGDOM",
@@ -166,7 +227,14 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "NETHERLANDS",
+      "LUXEMBOURG",
+      "IRELAND",
+      "FRANCE",
+      "BELGIUM"
+    ]
   },
   {
     "id": "UNITEDARABEMIRATES",
@@ -179,7 +247,15 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "YEMEN",
+      "SAUDIARABIA",
+      "QATAR",
+      "OMAN",
+      "KUWAIT",
+      "IRAN"
+    ]
   },
   {
     "id": "UKRAINE",
@@ -192,7 +268,19 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Eurasia"
+    "continent": "Eurasia",
+    "neighbors": [
+      "TURKEY",
+      "SLOVAKIA",
+      "SERBIA",
+      "ROMANIA",
+      "MOLDOVA",
+      "LITHUANIA",
+      "LATVIA",
+      "ESTONIA",
+      "BULGARIA",
+      "BELARUS"
+    ]
   },
   {
     "id": "UGANDA",
@@ -205,7 +293,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "TANZANIA",
+      "SSUDAN",
+      "RWANDA",
+      "KENYA",
+      "ETHIOPIA",
+      "DEMREPCONGO",
+      "BURUNDI"
+    ]
   },
   {
     "id": "TURKMENISTAN",
@@ -218,7 +315,14 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "UZBEKISTAN",
+      "TAJIKISTAN",
+      "IRAN",
+      "AZERBAIJAN",
+      "AFGHANISTAN"
+    ]
   },
   {
     "id": "TURKEY",
@@ -231,7 +335,21 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "UKRAINE",
+      "SYRIA",
+      "MOLDOVA",
+      "LEBANON",
+      "JORDAN",
+      "ISRAEL",
+      "PALESTINE",
+      "IRAQ",
+      "GEORGIA",
+      "CYPRUS",
+      "BULGARIA",
+      "ARMENIA"
+    ]
   },
   {
     "id": "TUNISIA",
@@ -244,7 +362,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "LIBYA",
+      "ITALY",
+      "ALGERIA"
+    ]
   },
   {
     "id": "TRINIDADANDTOBAGO",
@@ -257,7 +380,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "VENEZUELA",
+      "SURINAME",
+      "GUYANA"
+    ]
   },
   {
     "id": "TONGA",
@@ -270,7 +398,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": []
   },
   {
     "id": "TOGO",
@@ -283,7 +412,18 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "NIGERIA",
+      "MALI",
+      "LIBERIA",
+      "GHANA",
+      "EQGUINEA",
+      "CTEDIVOIRE",
+      "CAMEROON",
+      "BURKINAFASO",
+      "BENIN"
+    ]
   },
   {
     "id": "TIMORLESTE",
@@ -296,7 +436,10 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "INDONESIA"
+    ]
   },
   {
     "id": "THAILAND",
@@ -309,7 +452,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "VIETNAM",
+      "LAOS",
+      "CAMBODIA",
+      "MYANMAR"
+    ]
   },
   {
     "id": "TANZANIA",
@@ -322,7 +471,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "ZAMBIA",
+      "UGANDA",
+      "RWANDA",
+      "MOZAMBIQUE",
+      "MALAWI",
+      "KENYA",
+      "DEMREPCONGO",
+      "BURUNDI"
+    ]
   },
   {
     "id": "TAJIKISTAN",
@@ -335,7 +494,15 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "UZBEKISTAN",
+      "TURKMENISTAN",
+      "PAKISTAN",
+      "KYRGYZSTAN",
+      "KAZAKHSTAN",
+      "AFGHANISTAN"
+    ]
   },
   {
     "id": "SYRIA",
@@ -348,7 +515,20 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "TURKEY",
+      "LEBANON",
+      "KUWAIT",
+      "JORDAN",
+      "ISRAEL",
+      "PALESTINE",
+      "IRAQ",
+      "GEORGIA",
+      "CYPRUS",
+      "AZERBAIJAN",
+      "ARMENIA"
+    ]
   },
   {
     "id": "SWITZERLAND",
@@ -361,7 +541,23 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "SLOVAKIA",
+      "SLOVENIA",
+      "NETHERLANDS",
+      "MONTENEGRO",
+      "LUXEMBOURG",
+      "ITALY",
+      "HUNGARY",
+      "GERMANY",
+      "DENMARK",
+      "CZECHIA",
+      "CROATIA",
+      "BOSNIAANDHERZ",
+      "BELGIUM",
+      "AUSTRIA"
+    ]
   },
   {
     "id": "SWEDEN",
@@ -374,7 +570,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Eurasia"
+    "continent": "Eurasia",
+    "neighbors": [
+      "POLAND",
+      "NORWAY",
+      "LITHUANIA",
+      "LATVIA",
+      "FINLAND",
+      "ESTONIA",
+      "DENMARK"
+    ]
   },
   {
     "id": "ESWATINI",
@@ -387,7 +592,14 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "ZIMBABWE",
+      "SOUTHAFRICA",
+      "MOZAMBIQUE",
+      "LESOTHO",
+      "BOTSWANA"
+    ]
   },
   {
     "id": "SURINAME",
@@ -400,7 +612,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "VENEZUELA",
+      "TRINIDADANDTOBAGO",
+      "GUYANA"
+    ]
   },
   {
     "id": "SSUDAN",
@@ -413,7 +630,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "UGANDA",
+      "SUDAN",
+      "RWANDA",
+      "KENYA",
+      "ETHIOPIA",
+      "ERITREA",
+      "CENTRALAFRICANREP",
+      "BURUNDI"
+    ]
   },
   {
     "id": "SUDAN",
@@ -426,7 +653,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "SSUDAN",
+      "ERITREA",
+      "EGYPT",
+      "CHAD"
+    ]
   },
   {
     "id": "SRILANKA",
@@ -439,7 +672,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": []
   },
   {
     "id": "SPAIN",
@@ -452,7 +686,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Eurasia"
+    "continent": "Eurasia",
+    "neighbors": [
+      "PORTUGAL",
+      "MOROCCO",
+      "FRANCE"
+    ]
   },
   {
     "id": "SOUTHKOREA",
@@ -465,7 +704,11 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "NORTHKOREA",
+      "JAPAN"
+    ]
   },
   {
     "id": "SOUTHAFRICA",
@@ -478,7 +721,14 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Africa"
+    "continent": "Africa",
+    "neighbors": [
+      "ZIMBABWE",
+      "ESWATINI",
+      "NAMIBIA",
+      "LESOTHO",
+      "BOTSWANA"
+    ]
   },
   {
     "id": "SOMALIA",
@@ -491,7 +741,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "YEMEN",
+      "KENYA",
+      "ETHIOPIA",
+      "DJIBOUTI"
+    ]
   },
   {
     "id": "SOLOMONIS",
@@ -504,7 +760,10 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "VANUATU"
+    ]
   },
   {
     "id": "SLOVAKIA",
@@ -517,7 +776,32 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "UKRAINE",
+      "SWITZERLAND",
+      "SLOVENIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "MONTENEGRO",
+      "MOLDOVA",
+      "MACEDONIA",
+      "LITHUANIA",
+      "LATVIA",
+      "ITALY",
+      "HUNGARY",
+      "GREECE",
+      "GERMANY",
+      "ESTONIA",
+      "CZECHIA",
+      "CROATIA",
+      "BULGARIA",
+      "BOSNIAANDHERZ",
+      "BELARUS",
+      "AUSTRIA",
+      "ALBANIA"
+    ]
   },
   {
     "id": "SLOVENIA",
@@ -530,7 +814,30 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "SWITZERLAND",
+      "SLOVAKIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "NETHERLANDS",
+      "MONTENEGRO",
+      "MACEDONIA",
+      "LUXEMBOURG",
+      "ITALY",
+      "HUNGARY",
+      "GREECE",
+      "GERMANY",
+      "DENMARK",
+      "CZECHIA",
+      "CROATIA",
+      "BULGARIA",
+      "BOSNIAANDHERZ",
+      "BELGIUM",
+      "AUSTRIA",
+      "ALBANIA"
+    ]
   },
   {
     "id": "SINGAPORE",
@@ -543,7 +850,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": []
   },
   {
     "id": "SIERRALEONE",
@@ -556,7 +864,19 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "SENEGAL",
+      "MAURITANIA",
+      "MALI",
+      "LIBERIA",
+      "GUINEABISSAU",
+      "GUINEA",
+      "GHANA",
+      "GAMBIA",
+      "CTEDIVOIRE",
+      "BURKINAFASO"
+    ]
   },
   {
     "id": "SEYCHELLES",
@@ -569,7 +889,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": []
   },
   {
     "id": "SERBIA",
@@ -582,7 +903,28 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "UKRAINE",
+      "SLOVAKIA",
+      "SLOVENIA",
+      "ROMANIA",
+      "POLAND",
+      "MONTENEGRO",
+      "MOLDOVA",
+      "MACEDONIA",
+      "LITHUANIA",
+      "ITALY",
+      "HUNGARY",
+      "GREECE",
+      "CZECHIA",
+      "CROATIA",
+      "BULGARIA",
+      "BOSNIAANDHERZ",
+      "BELARUS",
+      "AUSTRIA",
+      "ALBANIA"
+    ]
   },
   {
     "id": "SENEGAL",
@@ -595,7 +937,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "SIERRALEONE",
+      "MAURITANIA",
+      "MALI",
+      "LIBERIA",
+      "GUINEABISSAU",
+      "GUINEA",
+      "GAMBIA",
+      "CTEDIVOIRE"
+    ]
   },
   {
     "id": "SAUDIARABIA",
@@ -608,7 +960,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": [
+      "YEMEN",
+      "UNITEDARABEMIRATES",
+      "QATAR",
+      "OMAN",
+      "KUWAIT",
+      "JORDAN",
+      "IRAQ",
+      "ERITREA"
+    ]
   },
   {
     "id": "SOTOMANDPRINCIPE",
@@ -621,7 +983,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": []
   },
   {
     "id": "SANMARINO",
@@ -634,7 +997,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": []
   },
   {
     "id": "SAMOA",
@@ -647,7 +1011,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": []
   },
   {
     "id": "STVINANDGREN",
@@ -660,7 +1025,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": []
   },
   {
     "id": "SAINTLUCIA",
@@ -673,7 +1039,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": []
   },
   {
     "id": "STKITTSANDNEVIS",
@@ -686,7 +1053,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region4"
+    "continent": "Region4",
+    "neighbors": []
   },
   {
     "id": "RWANDA",
@@ -699,7 +1067,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "ZAMBIA",
+      "UGANDA",
+      "TANZANIA",
+      "SSUDAN",
+      "MALAWI",
+      "KENYA",
+      "DEMREPCONGO",
+      "BURUNDI"
+    ]
   },
   {
     "id": "RUSSIA",
@@ -712,7 +1090,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Eurasia"
+    "continent": "Eurasia",
+    "neighbors": []
   },
   {
     "id": "ROMANIA",
@@ -725,7 +1104,28 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "UKRAINE",
+      "SLOVAKIA",
+      "SLOVENIA",
+      "SERBIA",
+      "POLAND",
+      "MONTENEGRO",
+      "MOLDOVA",
+      "MACEDONIA",
+      "LITHUANIA",
+      "LATVIA",
+      "HUNGARY",
+      "GREECE",
+      "CZECHIA",
+      "CROATIA",
+      "BULGARIA",
+      "BOSNIAANDHERZ",
+      "BELARUS",
+      "AUSTRIA",
+      "ALBANIA"
+    ]
   },
   {
     "id": "QATAR",
@@ -738,7 +1138,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "YEMEN",
+      "UNITEDARABEMIRATES",
+      "SAUDIARABIA",
+      "OMAN",
+      "KUWAIT",
+      "IRAQ",
+      "IRAN"
+    ]
   },
   {
     "id": "PORTUGAL",
@@ -751,7 +1160,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "SPAIN",
+      "MOROCCO",
+      "FRANCE"
+    ]
   },
   {
     "id": "POLAND",
@@ -764,7 +1178,31 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Eurasia"
+    "continent": "Eurasia",
+    "neighbors": [
+      "SWEDEN",
+      "SLOVAKIA",
+      "SLOVENIA",
+      "SERBIA",
+      "ROMANIA",
+      "MONTENEGRO",
+      "MOLDOVA",
+      "MACEDONIA",
+      "LITHUANIA",
+      "LATVIA",
+      "ITALY",
+      "HUNGARY",
+      "GERMANY",
+      "ESTONIA",
+      "DENMARK",
+      "CZECHIA",
+      "CROATIA",
+      "BULGARIA",
+      "BOSNIAANDHERZ",
+      "BELARUS",
+      "AUSTRIA",
+      "ALBANIA"
+    ]
   },
   {
     "id": "PHILIPPINES",
@@ -777,7 +1215,10 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "BRUNEI"
+    ]
   },
   {
     "id": "PERU",
@@ -790,7 +1231,10 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Americas"
+    "continent": "Americas",
+    "neighbors": [
+      "ECUADOR"
+    ]
   },
   {
     "id": "PARAGUAY",
@@ -803,7 +1247,11 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "URUGUAY",
+      "BOLIVIA"
+    ]
   },
   {
     "id": "PAPUANEWGUINEA",
@@ -816,7 +1264,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": []
   },
   {
     "id": "PANAMA",
@@ -829,7 +1278,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "NICARAGUA",
+      "JAMAICA",
+      "HONDURAS",
+      "ELSALVADOR",
+      "ECUADOR",
+      "COSTARICA",
+      "COLOMBIA"
+    ]
   },
   {
     "id": "PALAU",
@@ -842,7 +1300,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": []
   },
   {
     "id": "PAKISTAN",
@@ -855,7 +1314,11 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "TAJIKISTAN",
+      "AFGHANISTAN"
+    ]
   },
   {
     "id": "OMAN",
@@ -868,7 +1331,14 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "YEMEN",
+      "UNITEDARABEMIRATES",
+      "SAUDIARABIA",
+      "QATAR",
+      "IRAN"
+    ]
   },
   {
     "id": "NORWAY",
@@ -881,7 +1351,11 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "SWEDEN",
+      "DENMARK"
+    ]
   },
   {
     "id": "NORTHKOREA",
@@ -894,7 +1368,11 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "SOUTHKOREA",
+      "JAPAN"
+    ]
   },
   {
     "id": "NIGERIA",
@@ -907,7 +1385,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Africa"
+    "continent": "Africa",
+    "neighbors": [
+      "TOGO",
+      "NIGER",
+      "GHANA",
+      "GABON",
+      "EQGUINEA",
+      "CAMEROON",
+      "BURKINAFASO",
+      "BENIN"
+    ]
   },
   {
     "id": "NIGER",
@@ -920,7 +1408,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "NIGERIA",
+      "CHAD",
+      "BENIN"
+    ]
   },
   {
     "id": "NICARAGUA",
@@ -933,7 +1426,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "PANAMA",
+      "JAMAICA",
+      "HONDURAS",
+      "GUATEMALA",
+      "ELSALVADOR",
+      "CUBA",
+      "COSTARICA",
+      "BELIZE"
+    ]
   },
   {
     "id": "NEWZEALAND",
@@ -946,7 +1449,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": []
   },
   {
     "id": "NETHERLANDS",
@@ -959,7 +1463,19 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "UNITEDKINGDOM",
+      "SWITZERLAND",
+      "SLOVENIA",
+      "LUXEMBOURG",
+      "ITALY",
+      "GERMANY",
+      "DENMARK",
+      "CZECHIA",
+      "BELGIUM",
+      "AUSTRIA"
+    ]
   },
   {
     "id": "NEPAL",
@@ -972,7 +1488,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "INDIA",
+      "BHUTAN",
+      "BANGLADESH"
+    ]
   },
   {
     "id": "NAURU",
@@ -985,7 +1506,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": []
   },
   {
     "id": "NAMIBIA",
@@ -998,7 +1520,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "SOUTHAFRICA",
+      "BOTSWANA",
+      "ANGOLA"
+    ]
   },
   {
     "id": "MOZAMBIQUE",
@@ -1011,7 +1538,15 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "ZIMBABWE",
+      "ZAMBIA",
+      "TANZANIA",
+      "ESWATINI",
+      "MALAWI",
+      "MADAGASCAR"
+    ]
   },
   {
     "id": "MOROCCO",
@@ -1024,7 +1559,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "SPAIN",
+      "PORTUGAL",
+      "MAURITANIA",
+      "ALGERIA"
+    ]
   },
   {
     "id": "MONTENEGRO",
@@ -1037,7 +1578,26 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "SWITZERLAND",
+      "SLOVAKIA",
+      "SLOVENIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "MOLDOVA",
+      "MACEDONIA",
+      "ITALY",
+      "HUNGARY",
+      "GREECE",
+      "CZECHIA",
+      "CROATIA",
+      "BULGARIA",
+      "BOSNIAANDHERZ",
+      "AUSTRIA",
+      "ALBANIA"
+    ]
   },
   {
     "id": "MONGOLIA",
@@ -1050,7 +1610,10 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Eurasia"
+    "continent": "Eurasia",
+    "neighbors": [
+      "CHINA"
+    ]
   },
   {
     "id": "MOLDOVA",
@@ -1063,7 +1626,26 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "UKRAINE",
+      "TURKEY",
+      "SLOVAKIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "MONTENEGRO",
+      "MACEDONIA",
+      "LITHUANIA",
+      "LATVIA",
+      "HUNGARY",
+      "GREECE",
+      "ESTONIA",
+      "BULGARIA",
+      "BOSNIAANDHERZ",
+      "BELARUS",
+      "ALBANIA"
+    ]
   },
   {
     "id": "MONACO",
@@ -1076,7 +1658,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": []
   },
   {
     "id": "MEXICO",
@@ -1089,7 +1672,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Americas"
+    "continent": "Americas",
+    "neighbors": []
   },
   {
     "id": "MAURITIUS",
@@ -1102,7 +1686,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": []
   },
   {
     "id": "MAURITANIA",
@@ -1115,7 +1700,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "SIERRALEONE",
+      "SENEGAL",
+      "MOROCCO",
+      "MALI",
+      "GUINEABISSAU",
+      "GUINEA",
+      "GAMBIA",
+      "BURKINAFASO"
+    ]
   },
   {
     "id": "MALTA",
@@ -1128,7 +1723,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": []
   },
   {
     "id": "MALI",
@@ -1141,7 +1737,18 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "TOGO",
+      "SIERRALEONE",
+      "SENEGAL",
+      "MAURITANIA",
+      "GUINEA",
+      "GHANA",
+      "CTEDIVOIRE",
+      "BURKINAFASO",
+      "BENIN"
+    ]
   },
   {
     "id": "MALDIVES",
@@ -1154,7 +1761,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": []
   },
   {
     "id": "MALAYSIA",
@@ -1167,7 +1775,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "INDONESIA",
+      "CAMBODIA",
+      "BRUNEI"
+    ]
   },
   {
     "id": "MALAWI",
@@ -1180,7 +1793,15 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "ZIMBABWE",
+      "ZAMBIA",
+      "TANZANIA",
+      "RWANDA",
+      "MOZAMBIQUE",
+      "BURUNDI"
+    ]
   },
   {
     "id": "MADAGASCAR",
@@ -1193,7 +1814,10 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "MOZAMBIQUE"
+    ]
   },
   {
     "id": "MACEDONIA",
@@ -1206,7 +1830,25 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "SLOVAKIA",
+      "SLOVENIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "MONTENEGRO",
+      "MOLDOVA",
+      "ITALY",
+      "HUNGARY",
+      "GREECE",
+      "CZECHIA",
+      "CROATIA",
+      "BULGARIA",
+      "BOSNIAANDHERZ",
+      "AUSTRIA",
+      "ALBANIA"
+    ]
   },
   {
     "id": "LUXEMBOURG",
@@ -1219,7 +1861,20 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "UNITEDKINGDOM",
+      "SWITZERLAND",
+      "SLOVENIA",
+      "NETHERLANDS",
+      "ITALY",
+      "GERMANY",
+      "DENMARK",
+      "CZECHIA",
+      "CROATIA",
+      "BELGIUM",
+      "AUSTRIA"
+    ]
   },
   {
     "id": "LITHUANIA",
@@ -1232,7 +1887,22 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "UKRAINE",
+      "SWEDEN",
+      "SLOVAKIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "MOLDOVA",
+      "LATVIA",
+      "HUNGARY",
+      "FINLAND",
+      "ESTONIA",
+      "CZECHIA",
+      "BELARUS"
+    ]
   },
   {
     "id": "LIECHTENSTEIN",
@@ -1245,7 +1915,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": []
   },
   {
     "id": "LIBYA",
@@ -1258,7 +1929,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "TUNISIA",
+      "EGYPT",
+      "CHAD"
+    ]
   },
   {
     "id": "LIBERIA",
@@ -1271,7 +1947,18 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "TOGO",
+      "SIERRALEONE",
+      "SENEGAL",
+      "GUINEABISSAU",
+      "GUINEA",
+      "GHANA",
+      "GAMBIA",
+      "CTEDIVOIRE",
+      "BURKINAFASO"
+    ]
   },
   {
     "id": "LESOTHO",
@@ -1284,7 +1971,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "ZIMBABWE",
+      "ESWATINI",
+      "SOUTHAFRICA",
+      "BOTSWANA"
+    ]
   },
   {
     "id": "LEBANON",
@@ -1297,7 +1990,19 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "TURKEY",
+      "SYRIA",
+      "JORDAN",
+      "ISRAEL",
+      "PALESTINE",
+      "IRAQ",
+      "GEORGIA",
+      "EGYPT",
+      "CYPRUS",
+      "ARMENIA"
+    ]
   },
   {
     "id": "LATVIA",
@@ -1310,7 +2015,21 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "UKRAINE",
+      "SWEDEN",
+      "SLOVAKIA",
+      "ROMANIA",
+      "POLAND",
+      "MOLDOVA",
+      "LITHUANIA",
+      "HUNGARY",
+      "FINLAND",
+      "ESTONIA",
+      "CZECHIA",
+      "BELARUS"
+    ]
   },
   {
     "id": "LAOS",
@@ -1323,7 +2042,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "VIETNAM",
+      "THAILAND",
+      "CAMBODIA",
+      "MYANMAR"
+    ]
   },
   {
     "id": "KYRGYZSTAN",
@@ -1336,7 +2061,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "UZBEKISTAN",
+      "TAJIKISTAN",
+      "KAZAKHSTAN",
+      "AFGHANISTAN"
+    ]
   },
   {
     "id": "KUWAIT",
@@ -1349,7 +2080,18 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "UNITEDARABEMIRATES",
+      "SYRIA",
+      "SAUDIARABIA",
+      "QATAR",
+      "JORDAN",
+      "IRAQ",
+      "IRAN",
+      "AZERBAIJAN",
+      "ARMENIA"
+    ]
   },
   {
     "id": "KIRIBATI",
@@ -1362,7 +2104,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": []
   },
   {
     "id": "KENYA",
@@ -1375,7 +2118,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Africa"
+    "continent": "Africa",
+    "neighbors": [
+      "UGANDA",
+      "TANZANIA",
+      "SSUDAN",
+      "SOMALIA",
+      "RWANDA",
+      "ETHIOPIA",
+      "BURUNDI"
+    ]
   },
   {
     "id": "KAZAKHSTAN",
@@ -1388,7 +2140,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Eurasia"
+    "continent": "Eurasia",
+    "neighbors": [
+      "UZBEKISTAN",
+      "TAJIKISTAN",
+      "KYRGYZSTAN"
+    ]
   },
   {
     "id": "JORDAN",
@@ -1401,7 +2158,19 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "TURKEY",
+      "SYRIA",
+      "SAUDIARABIA",
+      "LEBANON",
+      "KUWAIT",
+      "ISRAEL",
+      "PALESTINE",
+      "IRAQ",
+      "EGYPT",
+      "CYPRUS"
+    ]
   },
   {
     "id": "JAPAN",
@@ -1414,7 +2183,11 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "SOUTHKOREA",
+      "NORTHKOREA"
+    ]
   },
   {
     "id": "JAMAICA",
@@ -1427,7 +2200,18 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "PANAMA",
+      "NICARAGUA",
+      "HONDURAS",
+      "HAITI",
+      "DOMINICANREP",
+      "CUBA",
+      "COSTARICA",
+      "BELIZE",
+      "BAHAMAS"
+    ]
   },
   {
     "id": "ITALY",
@@ -1440,7 +2224,28 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Eurasia"
+    "continent": "Eurasia",
+    "neighbors": [
+      "TUNISIA",
+      "SWITZERLAND",
+      "SLOVAKIA",
+      "SLOVENIA",
+      "SERBIA",
+      "POLAND",
+      "NETHERLANDS",
+      "MONTENEGRO",
+      "MACEDONIA",
+      "LUXEMBOURG",
+      "HUNGARY",
+      "GREECE",
+      "GERMANY",
+      "CZECHIA",
+      "CROATIA",
+      "BOSNIAANDHERZ",
+      "BELGIUM",
+      "AUSTRIA",
+      "ALBANIA"
+    ]
   },
   {
     "id": "ISRAEL",
@@ -1453,7 +2258,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "TURKEY",
+      "SYRIA",
+      "LEBANON",
+      "JORDAN",
+      "PALESTINE",
+      "IRAQ",
+      "EGYPT",
+      "CYPRUS"
+    ]
   },
   {
     "id": "PALESTINE",
@@ -1466,7 +2281,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "TURKEY",
+      "SYRIA",
+      "LEBANON",
+      "JORDAN",
+      "ISRAEL",
+      "IRAQ",
+      "EGYPT",
+      "CYPRUS"
+    ]
   },
   {
     "id": "IRELAND",
@@ -1479,7 +2304,11 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "UNITEDKINGDOM",
+      "FRANCE"
+    ]
   },
   {
     "id": "IRAQ",
@@ -1492,7 +2321,23 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "TURKEY",
+      "SYRIA",
+      "SAUDIARABIA",
+      "QATAR",
+      "LEBANON",
+      "KUWAIT",
+      "JORDAN",
+      "ISRAEL",
+      "PALESTINE",
+      "IRAN",
+      "GEORGIA",
+      "CYPRUS",
+      "AZERBAIJAN",
+      "ARMENIA"
+    ]
   },
   {
     "id": "IRAN",
@@ -1505,7 +2350,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "UNITEDARABEMIRATES",
+      "TURKMENISTAN",
+      "QATAR",
+      "OMAN",
+      "KUWAIT",
+      "IRAQ",
+      "AZERBAIJAN",
+      "AFGHANISTAN"
+    ]
   },
   {
     "id": "INDONESIA",
@@ -1518,7 +2373,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "TIMORLESTE",
+      "MALAYSIA",
+      "BRUNEI"
+    ]
   },
   {
     "id": "INDIA",
@@ -1531,7 +2391,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Eurasia"
+    "continent": "Eurasia",
+    "neighbors": [
+      "NEPAL",
+      "BHUTAN",
+      "BANGLADESH"
+    ]
   },
   {
     "id": "ICELAND",
@@ -1544,7 +2409,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": []
   },
   {
     "id": "HUNGARY",
@@ -1557,7 +2423,30 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "SWITZERLAND",
+      "SLOVAKIA",
+      "SLOVENIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "MONTENEGRO",
+      "MOLDOVA",
+      "MACEDONIA",
+      "LITHUANIA",
+      "LATVIA",
+      "ITALY",
+      "GREECE",
+      "GERMANY",
+      "CZECHIA",
+      "CROATIA",
+      "BULGARIA",
+      "BOSNIAANDHERZ",
+      "BELARUS",
+      "AUSTRIA",
+      "ALBANIA"
+    ]
   },
   {
     "id": "HONDURAS",
@@ -1570,7 +2459,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "PANAMA",
+      "NICARAGUA",
+      "JAMAICA",
+      "GUATEMALA",
+      "ELSALVADOR",
+      "CUBA",
+      "COSTARICA",
+      "BELIZE"
+    ]
   },
   {
     "id": "HAITI",
@@ -1583,7 +2482,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "JAMAICA",
+      "DOMINICANREP",
+      "CUBA",
+      "BAHAMAS"
+    ]
   },
   {
     "id": "GUYANA",
@@ -1596,7 +2501,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "VENEZUELA",
+      "TRINIDADANDTOBAGO",
+      "SURINAME"
+    ]
   },
   {
     "id": "GUINEABISSAU",
@@ -1609,7 +2519,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "SIERRALEONE",
+      "SENEGAL",
+      "MAURITANIA",
+      "LIBERIA",
+      "GUINEA",
+      "GAMBIA",
+      "CTEDIVOIRE"
+    ]
   },
   {
     "id": "GUINEA",
@@ -1622,7 +2541,19 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "SIERRALEONE",
+      "SENEGAL",
+      "MAURITANIA",
+      "MALI",
+      "LIBERIA",
+      "GUINEABISSAU",
+      "GHANA",
+      "GAMBIA",
+      "CTEDIVOIRE",
+      "BURKINAFASO"
+    ]
   },
   {
     "id": "GUATEMALA",
@@ -1635,7 +2566,14 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "NICARAGUA",
+      "HONDURAS",
+      "ELSALVADOR",
+      "COSTARICA",
+      "BELIZE"
+    ]
   },
   {
     "id": "GRENADA",
@@ -1648,7 +2586,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": []
   },
   {
     "id": "GREECE",
@@ -1661,7 +2600,23 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "SLOVAKIA",
+      "SLOVENIA",
+      "SERBIA",
+      "ROMANIA",
+      "MONTENEGRO",
+      "MOLDOVA",
+      "MACEDONIA",
+      "ITALY",
+      "HUNGARY",
+      "CYPRUS",
+      "CROATIA",
+      "BULGARIA",
+      "BOSNIAANDHERZ",
+      "ALBANIA"
+    ]
   },
   {
     "id": "GHANA",
@@ -1674,7 +2629,18 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "TOGO",
+      "SIERRALEONE",
+      "NIGERIA",
+      "MALI",
+      "LIBERIA",
+      "GUINEA",
+      "CTEDIVOIRE",
+      "BURKINAFASO",
+      "BENIN"
+    ]
   },
   {
     "id": "GERMANY",
@@ -1687,7 +2653,23 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Eurasia"
+    "continent": "Eurasia",
+    "neighbors": [
+      "SWITZERLAND",
+      "SLOVAKIA",
+      "SLOVENIA",
+      "POLAND",
+      "NETHERLANDS",
+      "LUXEMBOURG",
+      "ITALY",
+      "HUNGARY",
+      "DENMARK",
+      "CZECHIA",
+      "CROATIA",
+      "BOSNIAANDHERZ",
+      "BELGIUM",
+      "AUSTRIA"
+    ]
   },
   {
     "id": "GEORGIA",
@@ -1700,7 +2682,15 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "TURKEY",
+      "SYRIA",
+      "LEBANON",
+      "IRAQ",
+      "AZERBAIJAN",
+      "ARMENIA"
+    ]
   },
   {
     "id": "GAMBIA",
@@ -1713,7 +2703,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "SIERRALEONE",
+      "SENEGAL",
+      "MAURITANIA",
+      "LIBERIA",
+      "GUINEABISSAU",
+      "GUINEA",
+      "CTEDIVOIRE"
+    ]
   },
   {
     "id": "GABON",
@@ -1726,7 +2725,14 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "NIGERIA",
+      "EQGUINEA",
+      "CONGO",
+      "CENTRALAFRICANREP",
+      "CAMEROON"
+    ]
   },
   {
     "id": "FRANCE",
@@ -1739,7 +2745,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Eurasia"
+    "continent": "Eurasia",
+    "neighbors": [
+      "UNITEDKINGDOM",
+      "SPAIN",
+      "PORTUGAL",
+      "IRELAND"
+    ]
   },
   {
     "id": "FINLAND",
@@ -1752,7 +2764,14 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "SWEDEN",
+      "LITHUANIA",
+      "LATVIA",
+      "ESTONIA",
+      "BELARUS"
+    ]
   },
   {
     "id": "FIJI",
@@ -1765,7 +2784,10 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region2"
+    "continent": "Region2",
+    "neighbors": [
+      "VANUATU"
+    ]
   },
   {
     "id": "ETHIOPIA",
@@ -1778,7 +2800,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Africa"
+    "continent": "Africa",
+    "neighbors": [
+      "YEMEN",
+      "UGANDA",
+      "SSUDAN",
+      "SOMALIA",
+      "KENYA",
+      "ERITREA",
+      "DJIBOUTI"
+    ]
   },
   {
     "id": "ESTONIA",
@@ -1791,7 +2822,18 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "UKRAINE",
+      "SWEDEN",
+      "SLOVAKIA",
+      "POLAND",
+      "MOLDOVA",
+      "LITHUANIA",
+      "LATVIA",
+      "FINLAND",
+      "BELARUS"
+    ]
   },
   {
     "id": "ERITREA",
@@ -1804,7 +2846,15 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "YEMEN",
+      "SSUDAN",
+      "SUDAN",
+      "SAUDIARABIA",
+      "ETHIOPIA",
+      "DJIBOUTI"
+    ]
   },
   {
     "id": "EQGUINEA",
@@ -1817,7 +2867,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "TOGO",
+      "NIGERIA",
+      "GABON",
+      "CONGO",
+      "CENTRALAFRICANREP",
+      "CAMEROON",
+      "BENIN"
+    ]
   },
   {
     "id": "ELSALVADOR",
@@ -1830,7 +2889,15 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "PANAMA",
+      "NICARAGUA",
+      "HONDURAS",
+      "GUATEMALA",
+      "COSTARICA",
+      "BELIZE"
+    ]
   },
   {
     "id": "EGYPT",
@@ -1843,7 +2910,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Africa"
+    "continent": "Africa",
+    "neighbors": [
+      "SUDAN",
+      "LIBYA",
+      "LEBANON",
+      "JORDAN",
+      "ISRAEL",
+      "PALESTINE",
+      "CYPRUS"
+    ]
   },
   {
     "id": "ECUADOR",
@@ -1856,7 +2932,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "PERU",
+      "PANAMA",
+      "COLOMBIA"
+    ]
   },
   {
     "id": "DOMINICANREP",
@@ -1869,7 +2950,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "JAMAICA",
+      "HAITI",
+      "CUBA",
+      "BAHAMAS"
+    ]
   },
   {
     "id": "DOMINICA",
@@ -1882,7 +2969,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": []
   },
   {
     "id": "DJIBOUTI",
@@ -1895,7 +2983,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "YEMEN",
+      "SOMALIA",
+      "ETHIOPIA",
+      "ERITREA"
+    ]
   },
   {
     "id": "DENMARK",
@@ -1908,7 +3002,20 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "SWITZERLAND",
+      "SWEDEN",
+      "SLOVENIA",
+      "POLAND",
+      "NORWAY",
+      "NETHERLANDS",
+      "LUXEMBOURG",
+      "GERMANY",
+      "CZECHIA",
+      "BELGIUM",
+      "AUSTRIA"
+    ]
   },
   {
     "id": "CZECHIA",
@@ -1921,7 +3028,30 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "SWITZERLAND",
+      "SLOVAKIA",
+      "SLOVENIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "NETHERLANDS",
+      "MONTENEGRO",
+      "MACEDONIA",
+      "LUXEMBOURG",
+      "LITHUANIA",
+      "LATVIA",
+      "ITALY",
+      "HUNGARY",
+      "GERMANY",
+      "DENMARK",
+      "CROATIA",
+      "BOSNIAANDHERZ",
+      "BELGIUM",
+      "AUSTRIA",
+      "ALBANIA"
+    ]
   },
   {
     "id": "CYPRUS",
@@ -1934,7 +3064,19 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "TURKEY",
+      "SYRIA",
+      "LEBANON",
+      "JORDAN",
+      "ISRAEL",
+      "PALESTINE",
+      "IRAQ",
+      "GREECE",
+      "EGYPT",
+      "BULGARIA"
+    ]
   },
   {
     "id": "CUBA",
@@ -1947,7 +3089,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "NICARAGUA",
+      "JAMAICA",
+      "HONDURAS",
+      "HAITI",
+      "DOMINICANREP",
+      "BELIZE",
+      "BAHAMAS"
+    ]
   },
   {
     "id": "CROATIA",
@@ -1960,7 +3111,27 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "SWITZERLAND",
+      "SLOVAKIA",
+      "SLOVENIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "MONTENEGRO",
+      "MACEDONIA",
+      "LUXEMBOURG",
+      "ITALY",
+      "HUNGARY",
+      "GREECE",
+      "GERMANY",
+      "CZECHIA",
+      "BULGARIA",
+      "BOSNIAANDHERZ",
+      "AUSTRIA",
+      "ALBANIA"
+    ]
   },
   {
     "id": "CTEDIVOIRE",
@@ -1973,7 +3144,20 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "TOGO",
+      "SIERRALEONE",
+      "SENEGAL",
+      "MALI",
+      "LIBERIA",
+      "GUINEABISSAU",
+      "GUINEA",
+      "GHANA",
+      "GAMBIA",
+      "BURKINAFASO",
+      "BENIN"
+    ]
   },
   {
     "id": "COSTARICA",
@@ -1986,7 +3170,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "PANAMA",
+      "NICARAGUA",
+      "JAMAICA",
+      "HONDURAS",
+      "GUATEMALA",
+      "ELSALVADOR",
+      "BELIZE"
+    ]
   },
   {
     "id": "DEMREPCONGO",
@@ -1999,7 +3192,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "ZAMBIA",
+      "UGANDA",
+      "TANZANIA",
+      "RWANDA",
+      "CONGO",
+      "CENTRALAFRICANREP",
+      "BURUNDI",
+      "ANGOLA"
+    ]
   },
   {
     "id": "CONGO",
@@ -2012,7 +3215,15 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "GABON",
+      "EQGUINEA",
+      "DEMREPCONGO",
+      "CENTRALAFRICANREP",
+      "CAMEROON",
+      "ANGOLA"
+    ]
   },
   {
     "id": "COMOROS",
@@ -2025,7 +3236,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": []
   },
   {
     "id": "COLOMBIA",
@@ -2038,7 +3250,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Americas"
+    "continent": "Americas",
+    "neighbors": [
+      "VENEZUELA",
+      "PANAMA",
+      "ECUADOR"
+    ]
   },
   {
     "id": "CHINA",
@@ -2051,7 +3268,10 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Eurasia"
+    "continent": "Eurasia",
+    "neighbors": [
+      "MONGOLIA"
+    ]
   },
   {
     "id": "CHILE",
@@ -2064,7 +3284,10 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Americas"
+    "continent": "Americas",
+    "neighbors": [
+      "ARGENTINA"
+    ]
   },
   {
     "id": "CHAD",
@@ -2077,7 +3300,14 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "SUDAN",
+      "NIGER",
+      "LIBYA",
+      "CENTRALAFRICANREP",
+      "CAMEROON"
+    ]
   },
   {
     "id": "CENTRALAFRICANREP",
@@ -2090,7 +3320,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "SSUDAN",
+      "GABON",
+      "EQGUINEA",
+      "DEMREPCONGO",
+      "CONGO",
+      "CHAD",
+      "CAMEROON"
+    ]
   },
   {
     "id": "CABOVERDE",
@@ -2103,7 +3342,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": []
   },
   {
     "id": "CANADA",
@@ -2116,7 +3356,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Americas"
+    "continent": "Americas",
+    "neighbors": []
   },
   {
     "id": "CAMEROON",
@@ -2129,7 +3370,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "TOGO",
+      "NIGERIA",
+      "GABON",
+      "EQGUINEA",
+      "CONGO",
+      "CHAD",
+      "CENTRALAFRICANREP",
+      "BENIN"
+    ]
   },
   {
     "id": "CAMBODIA",
@@ -2142,7 +3393,14 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "VIETNAM",
+      "THAILAND",
+      "MALAYSIA",
+      "LAOS",
+      "MYANMAR"
+    ]
   },
   {
     "id": "MYANMAR",
@@ -2155,7 +3413,15 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region3"
+    "continent": "Region3",
+    "neighbors": [
+      "VIETNAM",
+      "THAILAND",
+      "LAOS",
+      "CAMBODIA",
+      "BHUTAN",
+      "BANGLADESH"
+    ]
   },
   {
     "id": "BURUNDI",
@@ -2168,7 +3434,17 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "ZAMBIA",
+      "UGANDA",
+      "TANZANIA",
+      "SSUDAN",
+      "RWANDA",
+      "MALAWI",
+      "KENYA",
+      "DEMREPCONGO"
+    ]
   },
   {
     "id": "BURKINAFASO",
@@ -2181,7 +3457,19 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "TOGO",
+      "SIERRALEONE",
+      "NIGERIA",
+      "MAURITANIA",
+      "MALI",
+      "LIBERIA",
+      "GUINEA",
+      "GHANA",
+      "CTEDIVOIRE",
+      "BENIN"
+    ]
   },
   {
     "id": "BULGARIA",
@@ -2194,7 +3482,26 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "UKRAINE",
+      "TURKEY",
+      "SLOVAKIA",
+      "SLOVENIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "MONTENEGRO",
+      "MOLDOVA",
+      "MACEDONIA",
+      "HUNGARY",
+      "GREECE",
+      "CYPRUS",
+      "CROATIA",
+      "BOSNIAANDHERZ",
+      "BELARUS",
+      "ALBANIA"
+    ]
   },
   {
     "id": "BRUNEI",
@@ -2207,7 +3514,12 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "PHILIPPINES",
+      "MALAYSIA",
+      "INDONESIA"
+    ]
   },
   {
     "id": "BRAZIL",
@@ -2220,7 +3532,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Americas"
+    "continent": "Americas",
+    "neighbors": []
   },
   {
     "id": "BOTSWANA",
@@ -2233,7 +3546,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "ZIMBABWE",
+      "ZAMBIA",
+      "ESWATINI",
+      "SOUTHAFRICA",
+      "NAMIBIA",
+      "LESOTHO",
+      "ANGOLA"
+    ]
   },
   {
     "id": "BOSNIAANDHERZ",
@@ -2246,7 +3568,27 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "SWITZERLAND",
+      "SLOVAKIA",
+      "SLOVENIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "MONTENEGRO",
+      "MOLDOVA",
+      "MACEDONIA",
+      "ITALY",
+      "HUNGARY",
+      "GREECE",
+      "GERMANY",
+      "CZECHIA",
+      "CROATIA",
+      "BULGARIA",
+      "AUSTRIA",
+      "ALBANIA"
+    ]
   },
   {
     "id": "BOLIVIA",
@@ -2259,7 +3601,10 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "PARAGUAY"
+    ]
   },
   {
     "id": "BHUTAN",
@@ -2272,7 +3617,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "NEPAL",
+      "INDIA",
+      "MYANMAR",
+      "BANGLADESH"
+    ]
   },
   {
     "id": "BENIN",
@@ -2285,7 +3636,18 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "TOGO",
+      "NIGERIA",
+      "NIGER",
+      "MALI",
+      "GHANA",
+      "EQGUINEA",
+      "CTEDIVOIRE",
+      "CAMEROON",
+      "BURKINAFASO"
+    ]
   },
   {
     "id": "BELIZE",
@@ -2298,7 +3660,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "NICARAGUA",
+      "JAMAICA",
+      "HONDURAS",
+      "GUATEMALA",
+      "ELSALVADOR",
+      "CUBA",
+      "COSTARICA"
+    ]
   },
   {
     "id": "BELGIUM",
@@ -2311,7 +3682,19 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "UNITEDKINGDOM",
+      "SWITZERLAND",
+      "SLOVENIA",
+      "NETHERLANDS",
+      "LUXEMBOURG",
+      "ITALY",
+      "GERMANY",
+      "DENMARK",
+      "CZECHIA",
+      "AUSTRIA"
+    ]
   },
   {
     "id": "BELARUS",
@@ -2324,7 +3707,21 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "UKRAINE",
+      "SLOVAKIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "MOLDOVA",
+      "LITHUANIA",
+      "LATVIA",
+      "HUNGARY",
+      "FINLAND",
+      "ESTONIA",
+      "BULGARIA"
+    ]
   },
   {
     "id": "BARBADOS",
@@ -2337,7 +3734,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": []
   },
   {
     "id": "BANGLADESH",
@@ -2350,7 +3748,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "NEPAL",
+      "INDIA",
+      "MYANMAR",
+      "BHUTAN"
+    ]
   },
   {
     "id": "BAHRAIN",
@@ -2363,7 +3767,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": []
   },
   {
     "id": "BAHAMAS",
@@ -2376,7 +3781,13 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "JAMAICA",
+      "HAITI",
+      "DOMINICANREP",
+      "CUBA"
+    ]
   },
   {
     "id": "AZERBAIJAN",
@@ -2389,7 +3800,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "TURKMENISTAN",
+      "SYRIA",
+      "KUWAIT",
+      "IRAQ",
+      "IRAN",
+      "GEORGIA",
+      "ARMENIA"
+    ]
   },
   {
     "id": "AUSTRIA",
@@ -2402,7 +3822,28 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "SWITZERLAND",
+      "SLOVAKIA",
+      "SLOVENIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "NETHERLANDS",
+      "MONTENEGRO",
+      "MACEDONIA",
+      "LUXEMBOURG",
+      "ITALY",
+      "HUNGARY",
+      "GERMANY",
+      "DENMARK",
+      "CZECHIA",
+      "CROATIA",
+      "BOSNIAANDHERZ",
+      "BELGIUM",
+      "ALBANIA"
+    ]
   },
   {
     "id": "AUSTRALIA",
@@ -2415,7 +3856,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": []
   },
   {
     "id": "ARMENIA",
@@ -2428,7 +3870,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "TURKEY",
+      "SYRIA",
+      "LEBANON",
+      "KUWAIT",
+      "IRAQ",
+      "GEORGIA",
+      "AZERBAIJAN"
+    ]
   },
   {
     "id": "ARGENTINA",
@@ -2441,7 +3892,11 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Americas"
+    "continent": "Americas",
+    "neighbors": [
+      "URUGUAY",
+      "CHILE"
+    ]
   },
   {
     "id": "ANTIGUAANDBARB",
@@ -2454,7 +3909,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": []
   },
   {
     "id": "ANGOLA",
@@ -2467,7 +3923,14 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Africa"
+    "continent": "Africa",
+    "neighbors": [
+      "ZAMBIA",
+      "NAMIBIA",
+      "DEMREPCONGO",
+      "CONGO",
+      "BOTSWANA"
+    ]
   },
   {
     "id": "ANDORRA",
@@ -2480,7 +3943,8 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": []
   },
   {
     "id": "ALGERIA",
@@ -2493,7 +3957,11 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "TUNISIA",
+      "MOROCCO"
+    ]
   },
   {
     "id": "ALBANIA",
@@ -2506,7 +3974,25 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "SLOVAKIA",
+      "SLOVENIA",
+      "SERBIA",
+      "ROMANIA",
+      "POLAND",
+      "MONTENEGRO",
+      "MOLDOVA",
+      "MACEDONIA",
+      "ITALY",
+      "HUNGARY",
+      "GREECE",
+      "CZECHIA",
+      "CROATIA",
+      "BULGARIA",
+      "BOSNIAANDHERZ",
+      "AUSTRIA"
+    ]
   },
   {
     "id": "AFGHANISTAN",
@@ -2519,7 +4005,16 @@ const countries = [
       "quarantineEfficiency": 0.1,
       "vaccineFunding": 0.05
     },
-    "continent": "Region1"
+    "continent": "Region1",
+    "neighbors": [
+      "UZBEKISTAN",
+      "TURKMENISTAN",
+      "TAJIKISTAN",
+      "PAKISTAN",
+      "KYRGYZSTAN",
+      "IRAN"
+    ]
   }
 ];
+
 export default countries;

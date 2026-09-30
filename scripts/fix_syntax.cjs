@@ -1,11 +1,8 @@
 const fs = require('fs');
-let code = fs.readFileSync('src/hooks/useSimulation.js', 'utf8');
+let code = fs.readFileSync('src/simulation/stepSimulation.js', 'utf8');
 
-// The line is: addNews(nextDay, "dYs" AEGIS AI EXECUTED NUCLEAR SANITIZATION PROTOCOL. ALL INFECTED ZONES NEUTRALIZED.", 'warning');
-// So we want to replace anything looking like addNews(nextDay, "..." AEGIS ... ", 'warning');
-code = code.replace(/addNews\(nextDay, "[^"]*" AEGIS AI EXECUTED NUCLEAR SANITIZATION PROTOCOL. ALL INFECTED ZONES NEUTRALIZED.", 'warning'\);/g, "addNews(nextDay, 'AEGIS AI EXECUTED NUCLEAR SANITIZATION PROTOCOL. ALL INFECTED ZONES NEUTRALIZED.', 'warning');");
+const regex = /if \(gameMode === 'DOOMSDAY'\) \{\s*const cumulativeInfectedRatio = \(globalPop - globalS\) \/ globalPop;\s*\}\s*\}\s*\}/;
+code = code.replace(regex, '');
 
-// Let's also fix the vaccine bracket: if (vaccineProgressRef.current >= 100 {
-code = code.replace(/if \(vaccineProgressRef\.current >= 100 \{/g, 'if (vaccineProgressRef.current >= 100) {');
-
-fs.writeFileSync('src/hooks/useSimulation.js', code);
+fs.writeFileSync('src/simulation/stepSimulation.js', code);
+console.log("Fixed syntax error");

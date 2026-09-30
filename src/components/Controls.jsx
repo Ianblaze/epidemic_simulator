@@ -4,6 +4,8 @@ import intel from '../data/intelligence.js';
 import diseaseProfiles from '../data/diseaseProfiles.js';
 import { runPrediction } from '../simulation/predictor.js';
 import { setGlobalSeed } from '../simulation/rng.js';
+import { generateDoomsdayDisease } from '../simulation/diseaseGenerator.js';
+import { initAegisDefenses } from '../simulation/aegisController.js';
 import { airports, seaports } from '../data/transit.js';
 
 const SimpleSlider = ({ label, val, min, max, step, onChange, format }) => (
