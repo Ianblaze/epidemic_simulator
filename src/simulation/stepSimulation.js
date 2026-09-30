@@ -127,7 +127,23 @@ export function stepSimulation(states, currentParams, day, gameMode, prevTotalGl
 
     const globalPop = globalS + globalE + totalGlobalI + globalR + globalD;
 
-    
+    // DOOMSDAY ENDGAME: When healthy < 1 billion, force disease to ALL remaining uninfected countries
+    if (gameMode === 'DOOMSDAY' && globalS < 1000000000) {
+        const infectedSources = [];
+        const uninfectedTargets = [];
+        newStates.forEach((s, cid) => {
+            if (s.I > 1000) infectedSources.push(cid);
+            if (s.I === 0 && s.E === 0 && s.S > 100) uninfectedTargets.push(cid);
+        });
+        if (infectedSources.length > 0) {
+            uninfectedTargets.forEach(targetId => {
+                const sourceId = infectedSources[Math.floor(random() * infectedSources.length)];
+                const seedAmount = Math.min(newStates.get(targetId).S, 500);
+                // Force infection via visible transit
+                transitEvents.push({ origin: sourceId, target: targetId, type: 'flight', amount: seedAmount });
+            });
+        }
+    }
 
     // Vaccine deployment moved to bottom
 
@@ -148,7 +164,7 @@ export function stepSimulation(states, currentParams, day, gameMode, prevTotalGl
     
     // AT EXACTLY 100%, GIVE VACCINE TO MAJOR HUBS SO THEY CAN START EXPORTING IT VIA BLUE PLANES
     if (newVaccineProgress >= 100 && vaccineProgress < 100) { // wait, vaccineProgress is the previous tick's progress
-        const prominentCountries = ['USA', 'CHN', 'GBR', 'FRA', 'DEU', 'JPN'];
+        const prominentCountries = ['UNITEDSTATESOFAMERICA', 'CHINA', 'UNITEDKINGDOM', 'FRANCE', 'GERMANY', 'JAPAN'];
         prominentCountries.forEach(id => {
             if (newStates.has(id)) {
                 newStates.get(id).vaccineAvailable = true;

@@ -274,7 +274,7 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
           ctx.setLineDash([]);
         }
 
-        if (!drawnDotsRef.current[cid]) drawnDotsRef.current[cid] = { infected: 0, dead: 0, recovered: 0 };
+        if (!drawnDotsRef.current[cid]) drawnDotsRef.current[cid] = { infected: 0, dead: 0, recovered: 0, vaccinated: 0 };
         const dots = drawnDotsRef.current[cid];
         const bounds = boundsRef.current[cid];
         if (!bounds) return;
