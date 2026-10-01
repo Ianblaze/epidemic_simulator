@@ -1,4 +1,4 @@
-export default [
+const historicalDiseases = [
   {
     "name": "COVID-19",
     "type": "Virus",
@@ -6000,3 +6000,27 @@ export default [
     ]
   }
 ];
+
+// Supplement the archive records with transparent interpretation metadata.
+// The disease totals above are retained as supplied; this metadata prevents
+// modeled values from being mistaken for precise surveillance observations.
+export default historicalDiseases.map((disease) => {
+  const year = Number(disease.year);
+  const longRunning = /HIV|AIDS|tuberculosis|malaria|hepatitis|chagas|leprosy|schistosomiasis|sleeping sickness|leishmaniasis/i.test(disease.name);
+  const scope = longRunning
+    ? 'Long-running or endemic burden'
+    : year < 1900
+      ? 'Retrospective historical estimate'
+      : disease.infected > 10000000
+        ? 'Cumulative estimate across waves'
+        : 'Reported outbreak estimate';
+  const confidence = year < 1900 || longRunning ? 'Low · reconstructed' : disease.infected > 10000000 ? 'Moderate · cumulative' : 'Variable · under-reporting likely';
+  const dataNote = longRunning
+    ? 'Totals may span many decades of endemic transmission and should not be read as one outbreak or a directly comparable case count.'
+    : year < 1900
+      ? 'The event predates modern surveillance. Dates, geographic boundaries and burden are retrospective estimates from incomplete records.'
+      : disease.infected > 10000000
+        ? 'This figure is a broad cumulative estimate across waves or regions; sources and case definitions can produce materially different totals.'
+        : 'Reported outbreak counts are incomplete. Limited testing and surveillance mean the true total may be higher.';
+  return { ...disease, burdenScope: scope, estimateConfidence: confidence, historicalDataNote: dataNote };
+});

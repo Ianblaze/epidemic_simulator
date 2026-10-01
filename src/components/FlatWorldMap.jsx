@@ -3,13 +3,15 @@ import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 import worldAtlasUrl from 'world-atlas/countries-110m.json?url';
 import { airports, seaports, routes } from '../data/transit.js';
+import { countryCentroids } from '../simulation/countryNetwork.js';
 
-export default function FlatWorldMap({ countryStates, params, isRunning, inboundInfectionsRef, vaccineProgress = 0, transitEvents = [] }) {
+export default function FlatWorldMap({ countryStates, params, isRunning, inboundInfectionsRef, vaccineProgress = 0, transitEvents = [], gameMode }) {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const [geoData, setGeoData] = useState(null);
   const bgImageRef = useRef(null);
 
+  const pendingTransitRef = useRef([]);
   const vehiclesRef = useRef([]); 
   const centroidsRef = useRef({});
   const boundsRef = useRef({});
@@ -22,46 +24,18 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
   const statesRef = useRef(countryStates);
   const paramsRef = useRef(params);
   const runningRef = useRef(isRunning);
-    const vaccineRef = useRef(vaccineProgress || 0);
+  const vaccineRef = useRef(vaccineProgress || 0);
+  const gameModeRef = useRef(gameMode);
   
     useEffect(() => {
-    if (isRunning && transitEvents && transitEvents.length > 0) {
-        transitEvents.forEach(evt => {
-            // Find coordinates, fallback to centroids if airport/seaport missing
-            let p1 = airports.find(p => p.country === evt.origin);
-            let p2 = airports.find(p => p.country === evt.target);
-            
-            if (!p1 && centroidsRef.current[evt.origin]) p1 = { x: centroidsRef.current[evt.origin][0], y: centroidsRef.current[evt.origin][1] };
-            if (!p2 && centroidsRef.current[evt.target]) p2 = { x: centroidsRef.current[evt.target][0], y: centroidsRef.current[evt.target][1] };
-
-            if (p1 && p2) {
-                if (evt.type === 'ship') {
-                    vehiclesRef.current.push({
-                        type: 'ship', startX: p1.x, startY: p1.y, endX: p2.x, endY: p2.y,
-                        endCountry: evt.target, progress: 0,
-                        speed: 0.01 + Math.random() * 0.01,
-                        infected: evt.isVaccine ? false : true, vaccine: evt.isVaccine ? true : false
-                    });
-                } else {
-                    const dx = p2.x - p1.x;
-                    const dy = p2.y - p1.y;
-                    // For land borders, draw a fast small arc. For flights, normal arc.
-                    vehiclesRef.current.push({
-                        type: 'flight', startX: p1.x, startY: p1.y, endX: p2.x, endY: p2.y,
-                        endCountry: evt.target, cx: p1.x + dx * 0.5 - dy * 0.2, cy: p1.y + dy * 0.5 + dx * 0.2,
-                        progress: 0,
-                        speed: evt.type === 'land' ? 0.05 : 0.02 + Math.random() * 0.01,
-                        infected: evt.isVaccine ? false : true, vaccine: evt.isVaccine ? true : false
-                    });
-                }
-            }
-        });
-    }
+    if (!transitEvents || transitEvents.length === 0) return;
+    pendingTransitRef.current.push(...transitEvents);
   }, [transitEvents]);
   
   useEffect(() => {
     statesRef.current = countryStates;
     paramsRef.current = params;
+    gameModeRef.current = gameMode;
     runningRef.current = isRunning;
       vaccineRef.current = vaccineProgress || 0;
 
@@ -92,7 +66,7 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
         }
       });
     }
-  }, [countryStates, params, isRunning, vaccineProgress]);
+  }, [countryStates, params, isRunning, vaccineProgress, gameMode]);
 
   useEffect(() => {
     fetch(worldAtlasUrl)
@@ -225,6 +199,52 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
         .translate([width / 2, height / 2]);
       const path = d3.geoPath().projection(projection).context(ctx);
 
+      const pointForCountry = (countryId, type) => {
+        const centroid = centroidsRef.current[countryId];
+        if (centroid) return { x: centroid[0], y: centroid[1] };
+        const preferred = type === 'ship' ? seaports : airports;
+        const fallback = type === 'ship' ? airports : seaports;
+        const location = preferred.find(p => p.country === countryId)
+          || fallback.find(p => p.country === countryId)
+          || (countryCentroids[countryId]
+            ? { lon: countryCentroids[countryId][0], lat: countryCentroids[countryId][1] }
+            : null);
+        if (!location || location.lon == null || location.lat == null) return null;
+        const projected = projection([location.lon, location.lat]);
+        if (!projected || !Number.isFinite(projected[0]) || !Number.isFinite(projected[1])) return null;
+        return { x: projected[0], y: projected[1] };
+      };
+
+      const queuedTransit = pendingTransitRef.current.splice(0, pendingTransitRef.current.length);
+      for (const evt of queuedTransit) {
+        const p1 = pointForCountry(evt.origin, evt.type);
+        const p2 = pointForCountry(evt.target, evt.type);
+        if (!p1 || !p2) continue;
+        const infected = !evt.isVaccine;
+        if (evt.type === 'ship') {
+          vehiclesRef.current.push({
+            type: 'ship', startX: p1.x, startY: p1.y, endX: p2.x, endY: p2.y,
+            endCountry: evt.target, progress: 0,
+            speed: 0.004 + Math.random() * 0.003,
+            infected, vaccine: !!evt.isVaccine,
+            alreadyApplied: evt.alreadyApplied === true || evt.isVaccine === true,
+            lastTrailProg: 0, payload: evt.amount
+          });
+        } else {
+          const dx = p2.x - p1.x;
+          const dy = p2.y - p1.y;
+          vehiclesRef.current.push({
+            type: 'flight', startX: p1.x, startY: p1.y, endX: p2.x, endY: p2.y,
+            endCountry: evt.target, cx: p1.x + dx * 0.5 - dy * 0.2, cy: p1.y + dy * 0.5 + dx * 0.2,
+            progress: 0,
+            speed: evt.type === 'land' ? 0.03 : 0.006 + Math.random() * 0.004,
+            infected, vaccine: !!evt.isVaccine,
+            alreadyApplied: evt.alreadyApplied === true || evt.isVaccine === true,
+            lastTrailProg: 0, payload: evt.amount
+          });
+        }
+      }
+
       const features = geoData.features;
 
       // 1. DRAW COUNTRIES & SPAWN DOTS (infected=red, dead=black, recovered=green)
@@ -353,6 +373,7 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
       // 3. SPAWN TRANSIT VEHICLES (respecting border closures)
       
         if (runningRef.current) {
+          const isDoomsday = gameModeRef.current === 'DOOMSDAY';
           const spawnCount = Math.random() < 0.4 ? 1 : 0;
           for (let spawnIndex = 0; spawnIndex < spawnCount; spawnIndex++) {
 
@@ -370,30 +391,28 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
           const segmentIndex = Math.floor(Math.random() * (route.path.length - 1));
           const p1 = activeSeaports.find(p => p.id === route.path[segmentIndex]);
           const p2 = activeSeaports.find(p => p.id === route.path[segmentIndex + 1]);
-          
-          const s1 = statesRef.current ? statesRef.current.get(p1.country) : null;
-            const s2 = statesRef.current ? statesRef.current.get(p2.country) : null;
-            const closed1 = s1 && s1.I > (s1.S + s1.E + s1.I + s1.R) * 0.2; // Close borders if >20% infected
-            const closed2 = s2 && s2.I > (s2.S + s2.E + s2.I + s2.R) * 0.2;
-            if (p1 && p2 && !p1.closed && !p2.closed && !closed1 && !closed2) {
-             const state = statesRef.current ? statesRef.current.get(p1.country) : null;
+          if (p1 && p2) {
+             const s1 = statesRef.current ? statesRef.current.get(p1.country) : null;
+             const s2 = statesRef.current ? statesRef.current.get(p2.country) : null;
+             const closed1 = s1 && s1.I > (s1.S + s1.E + s1.I + s1.R) * 0.2;
+             const closed2 = s2 && s2.I > (s2.S + s2.E + s2.I + s2.R) * 0.2;
+             const state = s1;
              let infected = false;
              let vaccine = false;
              if (state && state.vaccineAvailable && Math.random() < 0.4) vaccine = true;
-             
-             if (state && state.I > 0) {
-               const N = state.S + state.E + state.I + state.R + state.D;
-               const waterMult = paramsRef.current ? 1 + (paramsRef.current.waterImmunity || 0) * 10 : 1;
-               if (Math.random() < (1 - Math.exp(-state.I / 50000)) * waterMult) infected = true;
+             if (!isDoomsday && state && state.I > 0) {
+               const carrierChance = Math.min(0.001, (1 - Math.exp(-state.I / 100000)) * 0.002);
+               if (Math.random() < carrierChance) infected = true;
              }
-             // Use STRAIGHT LINE for ships (no bezier) to avoid cutting through land
+             if ((!p1.closed && !p2.closed && !closed1 && !closed2) || infected || vaccine) {
              vehiclesRef.current.push({
                type: 'ship', startX: p1.x, startY: p1.y, endX: p2.x, endY: p2.y,
                endCountry: p2.country,
                progress: 0, 
                speed: 0.0005 + Math.random() * 0.0005,
-               infected, vaccine, lastTrailProg: 0
+               infected, vaccine, lastTrailProg: 0, alreadyApplied: false
              });
+             }
           }
         } else {
           let pair = routes.flights[Math.floor(Math.random() * routes.flights.length)];
@@ -406,37 +425,40 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
           }
           const a1 = activeAirports.find(a => a.id === pair[0]);
           const a2 = activeAirports.find(a => a.id === pair[1]);
-          
-          const s1 = statesRef.current ? statesRef.current.get(a1.country) : null;
-            const s2 = statesRef.current ? statesRef.current.get(a2.country) : null;
-            const closed1 = s1 && s1.I > (s1.S + s1.E + s1.I + s1.R) * 0.2;
-            const closed2 = s2 && s2.I > (s2.S + s2.E + s2.I + s2.R) * 0.2;
-            if (a1 && a2 && !a1.closed && !a2.closed && !closed1 && !closed2) {
-             const state = statesRef.current ? statesRef.current.get(a1.country) : null;
+          if (a1 && a2) {
+             const s1 = statesRef.current ? statesRef.current.get(a1.country) : null;
+             const s2 = statesRef.current ? statesRef.current.get(a2.country) : null;
+             const closed1 = s1 && s1.I > (s1.S + s1.E + s1.I + s1.R) * 0.2;
+             const closed2 = s2 && s2.I > (s2.S + s2.E + s2.I + s2.R) * 0.2;
+             const state = s1;
              let infected = false;
              let vaccine = false;
              if (state && state.vaccineAvailable && Math.random() < 0.4) vaccine = true;
-             
-             if (state && state.I > 0) {
-               const N = state.S + state.E + state.I + state.R + state.D;
-               const airMult = paramsRef.current ? 1 + (paramsRef.current.airImmunity || 0) * 10 : 1;
-               if (Math.random() < (1 - Math.exp(-state.I / 50000)) * airMult) infected = true;
+             if (!isDoomsday && state && state.I > 0) {
+               const carrierChance = Math.min(0.001, (1 - Math.exp(-state.I / 100000)) * 0.002);
+               if (Math.random() < carrierChance) infected = true;
              }
+             if ((!a1.closed && !a2.closed && !closed1 && !closed2) || infected || vaccine) {
              const dx = a2.x - a1.x;
              const dy = a2.y - a1.y;
-             // Flights use bezier curves (arcs in the sky are fine)
              vehiclesRef.current.push({
                type: 'flight', startX: a1.x, startY: a1.y, endX: a2.x, endY: a2.y,
                endCountry: a2.country,
                cx: a1.x + dx * 0.5 - dy * 0.2, cy: a1.y + dy * 0.5 + dx * 0.2, 
                progress: 0, 
                speed: 0.001 + Math.random() * 0.001,
-               infected, vaccine, lastTrailProg: 0
+               infected, vaccine, lastTrailProg: 0, alreadyApplied: false
              });
+             }
           }
         }
       }
 
+        }
+        if (vehiclesRef.current.length > 220) {
+          const infected = vehiclesRef.current.filter(v => v.infected || v.vaccine);
+          const cosmetic = vehiclesRef.current.filter(v => !v.infected && !v.vaccine);
+          vehiclesRef.current = infected.slice(-160).concat(cosmetic.slice(-(220 - Math.min(infected.length, 160))));
         }
         // 4. DRAW AND UPDATE VEHICLES
       
@@ -447,13 +469,27 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
 
           if (v.progress >= 1) {
             // Infect destination
-            if (v.infected && inboundInfectionsRef && inboundInfectionsRef.current) {
+            if (v.infected && !v.alreadyApplied && inboundInfectionsRef && inboundInfectionsRef.current) {
                 inboundInfectionsRef.current.push({ countryId: v.endCountry, amount: v.payload || 10 });
             }
             continue; // Do not push to activeVehicles, thus removing it
           }
 
           activeVehicles.push(v);
+
+          if (v.infected) {
+            ctx.save();
+            ctx.strokeStyle = 'rgba(255, 20, 55, 0.95)';
+            ctx.lineWidth = 2.5;
+            ctx.shadowColor = '#ff0033';
+            ctx.shadowBlur = 14;
+            ctx.beginPath();
+            ctx.moveTo(v.startX, v.startY);
+            if (v.type === 'ship') ctx.lineTo(v.endX, v.endY);
+            else ctx.quadraticCurveTo(v.cx, v.cy, v.endX, v.endY);
+            ctx.stroke();
+            ctx.restore();
+          }
 
           const t = v.progress;
           let x, y, angle;
@@ -498,18 +534,28 @@ export default function FlatWorldMap({ countryStates, params, isRunning, inbound
             ctx.save();
             ctx.translate(x, y);
             ctx.rotate(angle);
-            ctx.fillStyle = v.vaccine ? 'rgba(0, 255, 255, 0.9)' : (v.infected ? 'rgba(255, 50, 50, 0.9)' : 'rgba(255, 255, 255, 0.9)');
+            ctx.fillStyle = v.vaccine ? 'rgba(0, 255, 255, 0.9)' : (v.infected ? 'rgba(255, 20, 55, 1)' : 'rgba(255, 255, 255, 0.9)');
+            if (v.infected) {
+              ctx.shadowColor = '#ff0033';
+              ctx.shadowBlur = 12;
+            }
             ctx.beginPath();
-            ctx.moveTo(3, 0);
-            ctx.lineTo(-2, 2);
-            ctx.lineTo(-2, -2);
+            ctx.moveTo(v.infected ? 6 : 3, 0);
+            ctx.lineTo(-3, v.infected ? 3 : 2);
+            ctx.lineTo(-2, 0);
+            ctx.lineTo(-3, v.infected ? -3 : -2);
             ctx.closePath();
             ctx.fill();
             ctx.restore();
           } else {
             // drawShip inline
-            ctx.fillStyle = v.vaccine ? 'rgba(0, 255, 255, 0.9)' : (v.infected ? 'rgba(255, 50, 50, 0.9)' : 'rgba(100, 200, 255, 0.7)');
-            ctx.fillRect(x - 1, y - 1, 2, 2);
+            ctx.fillStyle = v.vaccine ? 'rgba(0, 255, 255, 0.9)' : (v.infected ? 'rgba(255, 20, 55, 1)' : 'rgba(100, 200, 255, 0.7)');
+            if (v.infected) {
+              ctx.shadowColor = '#ff0033';
+              ctx.shadowBlur = 12;
+            }
+            ctx.fillRect(x - (v.infected ? 3 : 1), y - (v.infected ? 3 : 1), v.infected ? 6 : 2, v.infected ? 6 : 2);
+            ctx.shadowBlur = 0;
           }
         }
         vehiclesRef.current = activeVehicles;

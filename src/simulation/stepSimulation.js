@@ -4,13 +4,13 @@ import { random } from './rng.js';
 import countriesData from '../data/countries.js';
 import { airports, seaports } from '../data/transit.js';
 import { adaptAegisDefenses } from './aegisController.js';
+import { fallbackFlightNeighbors, flightNeighbors, landNeighbors, shipNeighbors } from './countryNetwork.js';
 
 export function stepSimulation(states, currentParams, day, gameMode, prevTotalGlobalI, vaccineProgress, vaccineStarted, variants) {
     let newStates = new Map();
     let transitEvents = [];
     let totalGlobalI = 0;
     
-    const cumulativeCases = prevTotalGlobalI; // We don't have globalR yet at the top of the function
     let newVaccineProgress = vaccineProgress;
     // We will calculate vaccine progress at the BOTTOM of the function when we have globalR!
     
@@ -71,81 +71,118 @@ export function stepSimulation(states, currentParams, day, gameMode, prevTotalGl
             }
         }
 
-        if (targetState.I > 50) {
+        if (targetState.I > (gameMode === 'DOOMSDAY' ? 1 : 250)) {
             const infectionPressure = 1 - Math.exp(-targetState.I / 50000);
             const c = countriesData.find(x => x.id === countryId);
             const borderStrictness = currentParams.borderStrictness || 0;
             const airTrans = currentParams.airImmunity !== undefined ? currentParams.airImmunity : (currentParams.airTransmission || 0.5);
             const waterTrans = currentParams.waterImmunity !== undefined ? currentParams.waterImmunity : (currentParams.waterTransmission || 0.5);
 
-            if (c && c.neighbors && c.neighbors.length > 0) {
-                c.neighbors.forEach(nid => {
+            if (gameMode === 'DOOMSDAY' && c) {
+                // Use actual shared land borders from the map topology. The
+                // legacy countries.js neighbor lists contain non-bordering
+                // countries, which caused unexplained Doomsday infections.
+                for (const nid of landNeighbors.get(countryId) || []) {
                     const ns = newStates.get(nid);
-                    if (ns && ns.S > 10) {
+                    if (ns && ns.S > 0) {
                         const routeRisk = Math.min(1.0, infectionPressure * 1.5 * (1 - borderStrictness));
                         if (random() < routeRisk) {
                             const amount = Math.floor(1 + random() * 20);
                             const actualAmount = Math.min(ns.S, amount);
-                            // DON'T infect here — let the visual land arc carry the payload
-                            if (actualAmount > 0) transitEvents.push({ origin: countryId, target: nid, type: 'land', amount: actualAmount });
+                            if (actualAmount > 0) {
+                                ns.S -= actualAmount;
+                                ns.E += actualAmount;
+                                transitEvents.push({ origin: countryId, target: nid, type: 'land', amount: actualAmount, alreadyApplied: true });
+                            }
                         }
+                    }
+                }
+            } else if (gameMode !== 'DOOMSDAY' && c && c.neighbors && c.neighbors.length > 0) {
+                c.neighbors.forEach(nid => {
+                    const ns = newStates.get(nid);
+                    if (ns && ns.S > 10 && random() < Math.min(1.0, infectionPressure * 1.5 * (1 - borderStrictness))) {
+                        const amount = Math.min(ns.S, Math.floor(1 + random() * 20));
+                        if (amount > 0) transitEvents.push({ origin: countryId, target: nid, type: 'land', amount });
                     }
                 });
             }
 
-            for (let i = 0; i < 4; i++) {
-                const rTargetId = countryKeysCache[Math.floor(random() * countryKeysCache.length)];
-                if (rTargetId !== countryId) {
-                    const rTarget = newStates.get(rTargetId);
-                    if (rTarget && rTarget.S > 10) {
-                        const destAirports = getAirports(rTargetId);
-                        const destSeaports = getSeaports(rTargetId);
-                        
-                        const airVolume = Math.min(1.0, (destAirports + 1.0) / 10); // Base connectivity fallback
-                        const seaVolume = Math.min(1.0, (destSeaports + 0.5) / 5); // Base connectivity fallback
+            if (gameMode === 'DOOMSDAY') {
+              // Seed distant countries only through actual flight and ship routes.
+              // The engine applies infection; the map shows the matching red transit.
+              for (const rTargetId of flightNeighbors.get(countryId) || []) {
+                const rTarget = newStates.get(rTargetId);
+                if (!rTarget || rTarget.S <= 0) continue;
+                const destAirports = getAirports(rTargetId);
+                const airVolume = fallbackFlightNeighbors.get(countryId)?.has(rTargetId)
+                  ? Math.max(0.65, Math.min(1.0, (destAirports + 2.0) / 6))
+                  : Math.min(1.0, (destAirports + 2.0) / 6);
+                const travelVolume = currentParams.travelVolume ?? 0.5;
 
-                        const airRisk = Math.min(1.0, infectionPressure * airVolume * airTrans * (1 - borderStrictness) * 0.3);
-                        if (random() < airRisk) {
-                            const amount = Math.floor(5 + random() * 25);
-                            const actualAmount = Math.min(rTarget.S, amount);
-                            // DON'T infect here — let the visual plane carry the payload
-                            if (actualAmount > 0) transitEvents.push({ origin: countryId, target: rTargetId, type: 'flight', amount: actualAmount });
-                        }
-                        
-                        const seaRisk = Math.min(1.0, infectionPressure * seaVolume * waterTrans * (1 - borderStrictness) * 0.15);
-                        if (random() < seaRisk) {
-                            const amount = Math.floor(1 + random() * 5);
-                            const actualAmount = Math.min(rTarget.S, amount);
-                            // DON'T infect here — let the visual ship carry the payload
-                            if (actualAmount > 0) transitEvents.push({ origin: countryId, target: rTargetId, type: 'ship', amount: actualAmount });
-                        }
-                    }
+                const airRisk = Math.min(1.0, infectionPressure * airVolume * airTrans * travelVolume * (1 - borderStrictness) * (fallbackFlightNeighbors.get(countryId)?.has(rTargetId) ? 1.2 : 0.65));
+                if (random() < airRisk) {
+                    const amount = Math.min(rTarget.S, Math.floor(5 + random() * 25));
+                    rTarget.S -= amount;
+                    rTarget.E += amount;
+                    transitEvents.push({ origin: countryId, target: rTargetId, type: 'flight', amount, alreadyApplied: true });
                 }
+
+              }
+
+              for (const rTargetId of shipNeighbors.get(countryId) || []) {
+                const rTarget = newStates.get(rTargetId);
+                if (!rTarget || rTarget.S <= 0) continue;
+                const destSeaports = getSeaports(rTargetId);
+                const seaVolume = Math.min(1.0, (destSeaports + 1.5) / 5);
+                const travelVolume = currentParams.travelVolume ?? 0.5;
+                const seaRisk = Math.min(1.0, infectionPressure * seaVolume * waterTrans * travelVolume * (1 - borderStrictness) * 0.35);
+                if (random() < seaRisk) {
+                    const amount = Math.min(rTarget.S, Math.floor(1 + random() * 5));
+                    rTarget.S -= amount;
+                    rTarget.E += amount;
+                    transitEvents.push({ origin: countryId, target: rTargetId, type: 'ship', amount, alreadyApplied: true });
+                }
+              }
+            } else {
+              // AEGIS: fewer, smaller export events so the pathogen is containable.
+              for (let i = 0; i < 2; i++) {
+                const rTargetId = countryKeysCache[Math.floor(random() * countryKeysCache.length)];
+                if (rTargetId === countryId) continue;
+                const rTarget = newStates.get(rTargetId);
+                if (!rTarget || rTarget.S <= 10) continue;
+                const destAirports = getAirports(rTargetId);
+                const destSeaports = getSeaports(rTargetId);
+                const airVolume = Math.min(1.0, (destAirports + 1.0) / 10);
+                const seaVolume = Math.min(1.0, (destSeaports + 0.5) / 5);
+                const airRisk = Math.min(1.0, infectionPressure * airVolume * airTrans * (1 - borderStrictness) * 0.0015);
+                if (random() < airRisk) {
+                  transitEvents.push({ origin: countryId, target: rTargetId, type: 'flight', amount: Math.min(rTarget.S, 1 + Math.floor(random() * 2)) });
+                }
+                const seaRisk = Math.min(1.0, infectionPressure * seaVolume * waterTrans * (1 - borderStrictness) * 0.0008);
+                if (random() < seaRisk) {
+                  transitEvents.push({ origin: countryId, target: rTargetId, type: 'ship', amount: Math.min(rTarget.S, 1) });
+                }
+              }
             }
         }
     });
 
-    const globalPop = globalS + globalE + totalGlobalI + globalR + globalD;
+    // Cross-border infections can modify countries already visited in the loop;
+    // aggregate after all routes so totals reflect the completed daily state.
+    globalS = 0;
+    globalE = 0;
+    globalD = 0;
+    globalR = 0;
+    totalGlobalI = 0;
+    newStates.forEach(state => {
+        globalS += state.S;
+        globalE += state.E;
+        totalGlobalI += state.I;
+        globalR += state.R;
+        globalD += state.D;
+    });
 
-    // DOOMSDAY ENDGAME: When healthy < 1 billion, force disease to ALL remaining uninfected countries
-    if (gameMode === 'DOOMSDAY' && globalS < 1000000000) {
-        const infectedSources = [];
-        const uninfectedTargets = [];
-        newStates.forEach((s, cid) => {
-            if (s.I > 1000) infectedSources.push(cid);
-            if (s.I === 0 && s.E === 0 && s.S > 100) uninfectedTargets.push(cid);
-        });
-        if (infectedSources.length > 0) {
-            uninfectedTargets.forEach(targetId => {
-                const sourceId = infectedSources[Math.floor(random() * infectedSources.length)];
-                const seedAmount = Math.min(newStates.get(targetId).S, 500);
-                // Force infection via visible transit
-                transitEvents.push({ origin: sourceId, target: targetId, type: 'flight', amount: seedAmount });
-            });
-        }
-    }
-
-    // Vaccine deployment moved to bottom
+    let globalPop = globalS + globalE + totalGlobalI + globalR + globalD;
 
     let newParams = { ...currentParams };
     let nukeFired = false;
@@ -205,7 +242,7 @@ export function stepSimulation(states, currentParams, day, gameMode, prevTotalGl
     let reason = '';
     
     if (gameMode === 'DOOMSDAY') {
-        if (globalS <= 1000) {
+        if (globalS < 1) {
             isFinished = true;
             reason = 'Global infection reached';
         } else if (globalE < 1 && totalGlobalI < 1) {
@@ -220,6 +257,12 @@ export function stepSimulation(states, currentParams, day, gameMode, prevTotalGl
             isFinished = true;
             reason = 'Humanity collapsed';
         }
+    }
+
+    if (transitEvents.length > 48) {
+        const vaccines = transitEvents.filter(event => event.isVaccine);
+        const infections = transitEvents.filter(event => !event.isVaccine);
+        transitEvents = vaccines.concat(infections.slice(-48));
     }
 
     return {

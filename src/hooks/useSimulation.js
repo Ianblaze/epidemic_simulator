@@ -93,16 +93,22 @@ export default function useSimulation() {
     logRef.current.push({ day, message, type });
   };
 
+  // DOOMSDAY's seeded random stream must be reserved for model transitions so
+  // the prediction and deployed simulation consume the same sequence. News is
+  // cosmetic and uses an independent source in that mode.
+  const newsRandom = () => gameModeRef.current === "DOOMSDAY" ? Math.random() : random();
+
   const initSimulation = useCallback(() => {
     statesRef.current.clear();
     setDay(0);
       dayRef.current = 0;
     setGameResult(null);
     setNukeFired(false);
-    setNukeFired(false);
+    setTransitEvents([]);
     setVaccineProgress(0);
     vaccineProgressRef.current = 0;
     vaccineStartedRef.current = false;
+    inboundInfectionsRef.current = [];
     inboundVaccinesRef.current = [];
     setCountryStates(new Map());
     setEventLog([]);
@@ -343,7 +349,7 @@ export default function useSimulation() {
     }
 
     // ---- COUNTRY-SPECIFIC NEWS (every 5-10 days) ----
-    if (nextDay - lastNewsRef.current >= 5 && random() < 0.6) {
+    if (nextDay - lastNewsRef.current >= 5 && newsRandom() < 0.6) {
       lastNewsRef.current = nextDay;
 
       // Find the country with the highest current infection rate
@@ -414,14 +420,14 @@ export default function useSimulation() {
       }
 
       // World Healing News
-      if (globalR > globalI * 2 && globalI > 100000 && random() < 0.05) {
+      if (globalR > globalI * 2 && globalI > 100000 && newsRandom() < 0.05) {
         addNews(
           nextDay,
           "Global recovery accelerates as healthcare systems stabilize and cases drop.",
           "info",
         );
       }
-      if (globalR > globalI * 5 && globalI > 10000 && random() < 0.05) {
+      if (globalR > globalI * 5 && globalI > 10000 && newsRandom() < 0.05) {
         addNews(
           nextDay,
           "World health officials cautiously optimistic as the pandemic recedes.",
@@ -448,7 +454,7 @@ export default function useSimulation() {
       }
 
       if (newsPool.length > 0) {
-        const pick = newsPool[Math.floor(random() * newsPool.length)];
+        const pick = newsPool[Math.floor(newsRandom() * newsPool.length)];
         addNews(nextDay, pick, "info");
       }
     }
@@ -533,7 +539,7 @@ export default function useSimulation() {
     });
 
     if (gameMode === "DOOMSDAY") {
-      if (sumS <= 1000) {
+      if (sumS < 1) {
         if (paramsRef.current.predictedDay && Math.abs(day - paramsRef.current.predictedDay) <= 100) {
           setGameResult("WIN");
         } else {
@@ -582,6 +588,7 @@ export default function useSimulation() {
     setSeedCountry,
     inboundInfectionsRef,
     inboundVaccinesRef,
+    transitEvents,
     prepare,
     start,
     stop,

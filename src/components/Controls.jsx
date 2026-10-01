@@ -239,61 +239,10 @@ setPredictionReport({ type: 'DOOMSDAY', day: pred.predictedDay });
                              className="hud-btn primary glow" 
                              onClick={async () => {
                                 if (setParams) {
-                                   const optModule = await import('../data/aegis_model.json');
-                                   const opt = optModule.default;
-                                   let newParams = { ...params };
-                                   if(opt) {
-                                      const inp = [
-    params.r0 || 2.5, 
-    params.incubationPeriod || 5.0, 
-    params.caseFatalityRate || 0.02, 
-    params.airImmunity || 0.5, 
-    params.waterImmunity || 0.5
-]; 
-const scaledInp = inp.map((v, i) => (v - opt.scaler_X_mean[i]) / opt.scaler_X_scale[i]);
-
-let l1 = [];
-for(let j=0; j<opt.weights[0][0].length; j++){
-    let s = opt.biases[0][j];
-    for(let i=0; i<scaledInp.length; i++) s += scaledInp[i] * opt.weights[0][i][j];
-    l1.push(Math.max(0, s));
-}
-let l2 = [];
-for(let j=0; j<opt.weights[1][0].length; j++){
-    let s = opt.biases[1][j];
-    for(let i=0; i<l1.length; i++) s += l1[i] * opt.weights[1][i][j];
-    l2.push(Math.max(0, s));
-}
-let out = [];
-for(let j=0; j<opt.weights[2][0].length; j++){
-    let s = opt.biases[2][j];
-    for(let i=0; i<l2.length; i++) s += l2[i] * opt.weights[2][i][j];
-    out.push(s);
-}
-const res = out.map((v, i) => (v * opt.scaler_y_scale[i]) + opt.scaler_y_mean[i]);
-
-// AEGIS SAFETY POLICY
-const severity = Math.max(0, Math.min(1, 
-    ((newParams.r0 - 1) / 12) * 0.55 + 
-    newParams.caseFatalityRate * 0.20 + 
-    newParams.airImmunity * 0.125 + 
-    newParams.waterImmunity * 0.125
-));
-
-const minIntervention = 0.60 + severity * 0.35;
-const minBorder = 0.55 + severity * 0.40;
-const minHygiene = 0.55 + severity * 0.35;
-const minQuarantine = 0.60 + severity * 0.35;
-const minVaccine = 0.65 + severity * 0.30;
-
-newParams = { 
-    ...newParams,
-    interventionStringency: parseFloat(Math.max(minIntervention, Math.min(1, res[0])).toFixed(2)),
-    borderStrictness: parseFloat(Math.max(minBorder, Math.min(1, res[1])).toFixed(2)),
-    hygieneCompliance: parseFloat(Math.max(minHygiene, Math.min(1, res[2])).toFixed(2)),
-    quarantineEfficiency: parseFloat(Math.max(minQuarantine, Math.min(1, res[3])).toFixed(2)),
-    vaccineFunding: parseFloat(Math.max(minVaccine, Math.min(1, res[4])).toFixed(2))
-};
+                                   const newParams = {
+                                      ...params,
+                                      ...initAegisDefenses(params, selectedCountryData || {})
+                                   };
 
 // Seed for reproducibility
 const seed = Math.floor(Math.random() * 1000000);
@@ -305,7 +254,7 @@ newParams.predictedDay = pred.predictedDay;
 setParams(newParams);
 setPredictionReport({ type: 'AEGIS', day: pred.predictedDay });
                                 }
-                             }}}
+                             }}
                              disabled={!seedCountry || !baseDisease}
                            >
                              CALCULATE AI DEFENSES & PREDICT

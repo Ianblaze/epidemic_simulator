@@ -157,11 +157,11 @@ export default function ParameterSliders({ params, setParams, isRunning, gameMod
                          params.waterImmunity * 0.125
                      ));
 
-                     const minIntervention = 0.60 + severity * 0.35;
-                     const minBorder = 0.55 + severity * 0.40;
-                     const minHygiene = 0.55 + severity * 0.35;
-                     const minQuarantine = 0.60 + severity * 0.35;
-                     const minVaccine = 0.65 + severity * 0.30;
+                     const minIntervention = 0.72 + severity * 0.26;
+                     const minBorder = 0.70 + severity * 0.28;
+                     const minHygiene = 0.68 + severity * 0.28;
+                     const minQuarantine = 0.74 + severity * 0.24;
+                     const minVaccine = 0.75 + severity * 0.24;
                      
                      setParams({ 
                          ...params,

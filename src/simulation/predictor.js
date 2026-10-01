@@ -11,9 +11,10 @@ export function runPrediction(params, seedCountry, gameMode, seed) {
 
     const initTarget = states.get(seedCountry);
     if (initTarget) {
-        initTarget.S -= 500;
-        initTarget.E += 400;
-        initTarget.I += 100;
+        // Match the live game's patient-zero seed exactly.
+        initTarget.S -= 10;
+        initTarget.E += 5;
+        initTarget.I += 5;
     }
 
     let day = 1;

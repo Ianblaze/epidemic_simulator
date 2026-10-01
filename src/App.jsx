@@ -56,6 +56,7 @@ export default function App() {
               inboundVaccinesRef={simulation.inboundVaccinesRef}
               seedCountry={simulation.seedCountry}
               vaccineProgress={simulation.vaccineProgress}
+              gameMode={simulation.gameMode}
           />
         ) : (
           <CinematicEarth 

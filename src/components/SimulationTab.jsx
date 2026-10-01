@@ -360,9 +360,9 @@ export default function SimulationTab(props) {
                               {gameResult === 'LOSS_TIMING' ? 
                                  (props.gameMode === 'DOOMSDAY' ? "Global infection was achieved, but the AI failed its timeframe prediction (missed by >100 days). Precision is required for a true victory." : "The pathogen was eradicated, but the AI failed its timeframe prediction (missed by >100 days). Precision is required for a true victory.")
                               : (props.gameMode === 'DOOMSDAY' ? (
-                                  gameResult === 'WIN' ? "Global infection achieved. Humanity has fallen exactly as the AI predicted. Project Doomsday is a complete success." : "The pathogen was contained and eradicated by global defenses. Humanity survives."
+                                  gameResult === 'WIN' ? "The entire global population has been infected on the predicted day. Project Doomsday is a complete success." : "The pathogen died out before every susceptible person was infected. Humanity survives."
                               ) : (
-                                  gameResult === 'WIN' ? (props.nukeFired ? "The pathogen was eradicated, but millions of infected civilians were sacrificed in a nuclear sanitization protocol to achieve containment." : "The pathogen has been completely eradicated within the predicted timeframe. Project Aegis has successfully defended humanity.") : "Global defenses were overwhelmed. The pathogen has breached containment and caused unacceptable casualties or lasted beyond 2 years (730 days)."
+                                  gameResult === 'WIN' ? (props.nukeFired ? "The pathogen was eradicated, but millions of infected civilians were sacrificed in a nuclear sanitization protocol to achieve containment." : "The pathogen has been completely eradicated within the predicted timeframe. Project Aegis has successfully defended humanity.") : "Global defenses were overwhelmed and the pathogen breached containment."
                               ))}
                           </p>
                           <button 

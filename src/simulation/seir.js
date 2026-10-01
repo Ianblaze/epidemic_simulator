@@ -15,9 +15,12 @@ export function seedInfection(state, count) {
 
 export function stepSEIR(state, params, dt, gameMode) {
   const livestockMult = 1 + (params.livestockAffection || 0) * 1.5;
-  const interventionEffect = 1 - 0.80 * (params.interventionStringency || 0);
-  const hygieneEffect = 1 - 0.40 * (params.hygieneCompliance || 0);
-  const quarantineEffect = 1 - 0.50 * (params.quarantineEfficiency || 0);
+  const interventionWeight = gameMode === 'AEGIS' ? 0.92 : 0.80;
+  const hygieneWeight = gameMode === 'AEGIS' ? 0.55 : 0.40;
+  const quarantineWeight = gameMode === 'AEGIS' ? 0.70 : 0.50;
+  const interventionEffect = 1 - interventionWeight * (params.interventionStringency || 0);
+  const hygieneEffect = 1 - hygieneWeight * (params.hygieneCompliance || 0);
+  const quarantineEffect = 1 - quarantineWeight * (params.quarantineEfficiency || 0);
   const effectiveR0 = Math.max(0, params.r0 * interventionEffect * hygieneEffect * quarantineEffect * livestockMult);
   
   const beta = effectiveR0 / params.infectiousPeriod;
@@ -34,10 +37,12 @@ export function stepSEIR(state, params, dt, gameMode) {
       if (N <= 0) break;
       
       let newExposed = beta * curS * curI / N * adt;
-      if (gameMode === 'DOOMSDAY' && curI > 0 && curS < N * 0.20) {
-          // Endgame sweep: Once the herd immunity threshold is nearing (e.g. < 20% remaining), 
-          // aggressively hunt down the rest to achieve DOOMSDAY victory conditions.
-          newExposed += Math.min(curS, curS * 0.02 + 10) * adt;
+      // Only force the last local tail. Extra mid-wave drain collapsed the
+      // whole map in ~17 days; the 9–10M stall happens after I fades.
+      if (gameMode === 'DOOMSDAY' && curS > 0 && (curI + curE) > 0) {
+        if (curS <= Math.max(1, N * 0.02) || curS < 100000) {
+          newExposed = Math.max(newExposed, Math.min(curS, Math.max(newExposed, curS * 0.15)));
+        }
       }
       
       let newInfectious = sigma * curE * adt;
@@ -59,6 +64,12 @@ export function stepSEIR(state, params, dt, gameMode) {
       curI = Math.max(0, curI + newInfectious - newRecovered - newDeaths);
       curR = Math.max(0, curR + newRecovered);
       curD = Math.max(0, curD + newDeaths);
+  }
+
+  if (gameMode === 'DOOMSDAY' && curS > 0 && (curE + curI + curR + curD) > 10 && (curE + curI) < 1) {
+    const mop = Math.min(curS, Math.max(1, curS * 0.35));
+    curS -= mop;
+    curE += mop;
   }
   
   return { S: curS, E: curE, I: curI, R: curR, D: curD };
